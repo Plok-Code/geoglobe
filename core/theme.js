@@ -37,6 +37,8 @@ export const theme = {
       select: readVar("--map-select"),
       selectEdge: readVar("--map-select-edge") || readVar("--map-select"),
       highlight: readVar("--map-highlight"),
+      highlightEdge: readVar("--map-highlight-edge") || readVar("--map-select-edge"),
+      locator: readVar("--map-locator") || readVar("--map-highlight"),
       graticule: readVar("--map-graticule"),
       sphereEdge: readVar("--map-sphere-edge"),
       space: readVar("--bg"),

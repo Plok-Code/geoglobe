@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>GeoGlobe</title>
+  <link rel="stylesheet" href="style.css?v=15" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Top-right controls (during play) -->
+  <div id="controls" class="controls hidden">
+    <button id="view-toggle" class="ctrl-btn" type="button"></button>
+    <button id="menu-btn" class="ctrl-btn" type="button">☰</button>
+  </div>
+
+  <!-- In-game HUD -->
+  <header id="hud" class="hud hidden">
+    <div class="hud-stats">
+      <div class="stat"><span class="stat-label" data-i18n="progressLabel">Country</span><span id="progress" class="stat-value">1 / 196</span></div>
+      <div class="stat"><span class="stat-label" data-i18n="score">Score</span><span id="score" class="stat-value">0</span></div>
+    </div>
+    <div id="task" class="task"></div>
+    <form id="guess-form" autocomplete="off" spellcheck="false">
+      <input id="guess-input" type="text"
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+      <button id="submit-btn" type="submit" data-i18n="guess">Guess</button>
+    </form>
+    <div id="hint" class="hint"></div>
+    <div class="hud-footer">
+      <div id="attempts" class="attempts"></div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+    <button id="next-btn" class="next-btn hidden" type="button"></button>
+  </header>
+
+  <!-- Side menu (settings / start) -->
+  <aside id="menu" class="menu">
+    <div class="menu-inner">
+      <h1 class="menu-title">GeoGlobe</h1>
+      <p class="menu-sub" data-i18n="tagline">Learn the world</p>
+
+      <div class="menu-group">
+        <label class="menu-label" data-i18n="langLabel">Language</label>
+        <div class="seg" id="seg-lang">
+          <button type="button" data-val="en">English</button>
+          <button type="button" data-val="fr">Français</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <label class="menu-label" data-i18n="subjectLabel">What to guess</label>
+        <div class="seg" id="seg-subject">
+          <button type="button" data-val="countries" data-i18n="subjCountries">Countries</button>
+          <button type="button" data-val="capitals" data-i18n="subjCapitals">Capitals</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <label class="menu-label" data-i18n="modeLabel">How to answer</label>
+        <div class="seg" id="seg-mode">
+          <button type="button" data-val="type" data-i18n="modeType">Type</button>
+          <button type="button" data-val="find" data-i18n="modeFind">Click</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <label class="menu-label" data-i18n="viewLabel">View</label>
+        <div class="seg" id="seg-view">
+          <button type="button" data-val="globe" data-i18n="viewGlobe">Globe</button>
+          <button type="button" data-val="map" data-i18n="viewMap">2D map</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <label class="menu-label" data-i18n="regionLabel">Region</label>
+        <select id="region-select" class="region-select"></select>
+      </div>
+
+      <button id="play-btn" class="primary" type="button" data-i18n="play">Play</button>
+    </div>
+  </aside>
+
+  <!-- End screen -->
+  <div id="end-screen" class="overlay hidden">
+    <div class="card">
+      <h1 data-i18n="gameOver">Game over</h1>
+      <p class="final-line"><span data-i18n="scored">You scored</span> <strong id="final-score">0</strong> /
+        <span id="final-total">196</span> <span id="final-pct" class="pct"></span></p>
+      <div id="missed-wrap" class="missed-wrap"></div>
+      <div class="end-actions">
+        <button id="replay-btn" class="primary" type="button" data-i18n="playAgain">Play again</button>
+        <button id="endmenu-btn" class="ghost" type="button" data-i18n="backToMenu">Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Permanent YouTube link -->
+  <a id="yt-link" href="https://www.youtube.com/@Plok-chaine" target="_blank" rel="noopener noreferrer"
+     title="Plok sur YouTube" aria-label="Chaine YouTube Plok">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.39.53A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.89.53 9.39.53 9.39.53s7.5 0 9.39-.53A3 3 0 0 0 23.5 17.8 31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z" fill="#FF0000"/>
+      <path d="M9.55 15.57V8.43L15.82 12z" fill="#fff"/>
+    </svg>
+    <span class="yt-label">Plok</span>
+  </a>
+
+  <script src="vendor/d3.v7.min.js"></script>
+  <script src="data/countries.js?v=11"></script>
+  <script src="data/answers.js?v=11"></script>
+  <script src="app.js?v=16"></script>
+</body>
+</html>

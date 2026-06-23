@@ -1,3 +1,16 @@
 // @ts-check
-// Stub during Phase 1. Replaced by the migrated quiz (engine extraction) next.
-export { default } from "../_comingSoon.js";
+import { createSession } from "./quiz.js";
+
+let session = null;
+
+/** @type {import('../../core/types.js').Mode} */
+export default {
+  id: "learn",
+  async mount(ctx) {
+    const s = await createSession(ctx);
+    if (ctx.signal.aborted) { s.destroy(); return; }
+    session = s;
+  },
+  unmount() { if (session) { session.destroy(); session = null; } },
+  onLangChange() { if (session) session.relang(); },
+};

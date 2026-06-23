@@ -1,0 +1,86 @@
+/* Learn-geography quiz: config / play HUD / end overlays floating over the map. */
+
+.quiz-card {
+  width: min(440px, calc(100vw - 32px));
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px;
+  backdrop-filter: blur(8px); pointer-events: auto;
+}
+.quiz-card .field { margin-bottom: 16px; }
+.quiz-card .field-label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 8px; }
+.quiz-card .seg { display: flex; gap: 6px; }
+.quiz-card .seg-btn { flex: 1; }
+.quiz-card .region-select {
+  width: 100%; min-height: 44px; padding: 10px 12px; font-size: 15px; font-weight: 600;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); cursor: pointer; appearance: none;
+}
+.quiz-card .region-select:focus { outline: none; border-color: var(--accent); }
+.quiz-card > .btn.primary { width: 100%; margin-top: 4px; }
+
+/* config: card centered, map visible + draggable behind/around it */
+.quiz-config { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 20; pointer-events: none; }
+
+/* play HUD: top-center card */
+.quiz-hud {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: min(520px, calc(100vw - 20px)); z-index: 20;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 14px 16px; backdrop-filter: blur(8px);
+}
+.hud-stats { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.stat-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.stat-value { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.hud-stats .stat:last-child { text-align: right; }
+.hud-stats .stat:last-child .stat-value { color: var(--accent); }
+
+.task { font-size: 15px; margin-bottom: 10px; line-height: 1.35; }
+.task.find { text-align: center; }
+.task .target { font-weight: 800; color: var(--accent); font-size: 17px; }
+
+.q-form { display: flex; gap: 8px; }
+.q-input {
+  flex: 1; min-width: 0; padding: 12px 14px; font-size: 16px; color: var(--text);
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none;
+}
+.q-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31, 111, 214, 0.18); }
+.q-input:disabled { opacity: 0.6; }
+.q-form .btn { padding: 0 16px; }
+
+.hint {
+  display: none; margin-top: 12px; padding: 8px 10px; background: var(--surface-2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--mono);
+  font-size: 22px; font-weight: 700; letter-spacing: 5px; text-align: center; white-space: pre-wrap; word-break: break-word;
+}
+.hint.show { display: block; }
+.hint .ok { color: var(--success); }
+.hint .miss { color: var(--text-muted); opacity: 0.7; }
+
+.hud-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 22px; margin-top: 10px; }
+.attempts { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+.feedback { font-size: 14px; font-weight: 600; text-align: right; flex: 1; }
+.feedback.correct { color: var(--success); }
+.feedback.wrong { color: var(--danger); }
+.feedback.reveal { color: var(--highlight); }
+.next-btn { width: 100%; margin-top: 12px; }
+
+/* end overlay */
+.quiz-end { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(8, 12, 17, 0.72); backdrop-filter: blur(3px); }
+.end-card { text-align: center; }
+.end-card h2 { margin: 0 0 12px; font-size: 26px; }
+.final-line { font-size: 18px; margin: 4px 0 18px; }
+.final-line strong { color: var(--accent); font-size: 22px; }
+.pct { color: var(--text-muted); font-size: 15px; }
+.missed-wrap { text-align: left; margin-bottom: 20px; }
+.missed-wrap h3 { font-size: 14px; color: var(--text-muted); margin: 0 0 8px; font-weight: 600; }
+.missed-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 170px; overflow-y: auto; }
+.missed-list span { font-size: 12.5px; background: color-mix(in srgb, var(--danger) 16%, transparent); color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent); padding: 3px 9px; border-radius: 999px; }
+.perfect { color: var(--success); font-weight: 700; font-size: 18px; text-align: center; }
+.end-actions { display: flex; gap: 10px; }
+.end-actions .btn { flex: 1; }
+
+@media (max-width: 600px) {
+  .quiz-hud { top: 8px; padding: 12px; }
+  .hint { font-size: 19px; letter-spacing: 4px; }
+}
