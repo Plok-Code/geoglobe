@@ -205,7 +205,38 @@ html, body {
 #yt-link svg { width: 26px; height: 26px; display: block; }
 .yt-label { font-size: 13px; font-weight: 700; }
 
-@media (max-width: 560px) {
-  .hud { top: 8px; padding: 12px; border-radius: 14px; }
+/* ---------- touch devices (phones + tablets): bigger tap targets ---------- */
+@media (pointer: coarse) {
+  .ctrl-btn { padding: 11px 15px; font-size: 15px; }
+  .seg button { padding: 12px 8px; font-size: 14px; }
+  .region-select { padding: 12px; font-size: 15px; }
+  #guess-input { padding: 14px; }
+  #submit-btn { padding: 0 20px; }
+  .next-btn { padding: 15px; }
+  .lang-btn { padding: 11px; }
+  .ghost, .end-actions .primary { padding: 14px; }
+}
+
+/* ---------- phones: reflow ---------- */
+@media (max-width: 600px) {
+  .hud {
+    top: 6px; left: 8px; right: 8px; width: auto;
+    transform: none; padding: 11px 12px; border-radius: 14px;
+  }
+  .hud-stats { margin-bottom: 8px; }
+  .task { font-size: 14px; }
+  /* controls go bottom-left so they never collide with the top HUD */
+  .controls { top: auto; bottom: 12px; left: 12px; right: auto; }
+  #yt-link { bottom: 12px; right: 12px; padding: 7px 9px; }
+  .yt-label { display: none; }
+  .menu { width: min(380px, 94vw); }
+  .menu-inner { padding: 20px 18px 24px; }
   .card { padding: 22px 18px; }
+  .card h1 { font-size: 24px; }
+}
+
+/* very small / landscape: keep the HUD compact so the map stays usable */
+@media (max-width: 600px) and (max-height: 460px) {
+  .hud { top: 6px; padding: 9px 11px; }
+  .hint { font-size: 18px; letter-spacing: 4px; }
 }

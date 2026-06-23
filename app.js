@@ -318,24 +318,7 @@
   versor.delta = function (v0, v1) { var w = [v0[1] * v1[2] - v0[2] * v1[1], v0[2] * v1[0] - v0[0] * v1[2], v0[0] * v1[1] - v0[1] * v1[0]], l = Math.sqrt(w[0] * w[0] + w[1] * w[1] + w[2] * w[2]); if (!l) return [1, 0, 0, 0]; var tt = Math.acos(Math.max(-1, Math.min(1, v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2]))) / 2, s = Math.sin(tt); return [Math.cos(tt), w[2] / l * s, -w[1] / l * s, w[0] / l * s]; };
   versor.multiply = function (q0, q1) { return [q0[0] * q1[0] - q0[1] * q1[1] - q0[2] * q1[2] - q0[3] * q1[3], q0[0] * q1[1] + q0[1] * q1[0] + q0[2] * q1[3] - q0[3] * q1[2], q0[0] * q1[2] - q0[1] * q1[3] + q0[2] * q1[0] + q0[3] * q1[1], q0[0] * q1[3] + q0[1] * q1[2] - q0[2] * q1[1] + q0[3] * q1[0]]; };
 
-  var dv0, dq0, dr0;
-  d3.select(canvas).call(d3.drag()
-    .on("start", function (event) {
-      stopAnim(); canvas.classList.add("grabbing");
-      if (config.view === "globe") { var p = projection.invert([event.x, event.y]); dv0 = p && isFinite(p[0]) ? versor.cartesian(p) : null; dr0 = projection.rotate(); dq0 = versor(dr0); }
-    })
-    .on("drag", function (event) {
-      if (config.view === "globe") {
-        if (!dv0) return;
-        var inv = projection.rotate(dr0).invert([event.x, event.y]);
-        if (!inv || !isFinite(inv[0])) { projection.rotate(dr0); return; }
-        projection.rotate(versor.rotation(versor.multiply(dq0, versor.delta(dv0, versor.cartesian(inv))))); render();
-      } else {
-        var tr = projection.translate(); projection.translate([tr[0] + event.dx, tr[1] + event.dy]); render();
-      }
-    })
-    .on("end", function () { canvas.classList.remove("grabbing"); }));
-
+  // Pointer interaction (mouse + touch + pinch + tap) is wired up after the click helpers below.
   canvas.addEventListener("wheel", function (e) {
     e.preventDefault();
     var k = e.deltaY < 0 ? 1.15 : 0.87;
@@ -372,16 +355,75 @@
     if (ll && isFinite(ll[0])) for (var j = 0; j < currentOrder.length; j++) if (d3.geoContains(featureById[currentOrder[j]], ll)) return currentOrder[j];
     return null;
   }
-  var downPt = null;
-  canvas.addEventListener("pointerdown", function (e) { downPt = [e.offsetX, e.offsetY]; });
-  canvas.addEventListener("pointerup", function (e) {
-    if (!downPt) return;
-    var moved = Math.hypot(e.offsetX - downPt[0], e.offsetY - downPt[1]); downPt = null;
-    if (moved > 6) return;
-    if (config.mode !== "find" || resolved) return;
-    var hit = pickCountry(e.offsetX, e.offsetY);
-    if (hit) handleClick(hit);
+  // ---- unified pointer interaction: drag/rotate, pinch-zoom, tap-to-click ----
+  var ptrs = new Map();
+  var dv0, dq0, dr0, panLast, pinch = null, tapStart = null, tapMoved = 0;
+
+  function ptArr() { var a = []; ptrs.forEach(function (v) { a.push(v); }); return a; }
+  function beginSingle(x, y) {
+    if (config.view === "globe") {
+      var p = projection.invert([x, y]);
+      dv0 = p && isFinite(p[0]) ? versor.cartesian(p) : null;
+      dr0 = projection.rotate(); dq0 = versor(dr0);
+    } else { panLast = [x, y]; }
+  }
+  function singleMove(x, y) {
+    if (config.view === "globe") {
+      if (!dv0) return;
+      var inv = projection.rotate(dr0).invert([x, y]);
+      if (!inv || !isFinite(inv[0])) { projection.rotate(dr0); return; }
+      projection.rotate(versor.rotation(versor.multiply(dq0, versor.delta(dv0, versor.cartesian(inv)))));
+    } else {
+      var tr = projection.translate();
+      projection.translate([tr[0] + (x - panLast[0]), tr[1] + (y - panLast[1])]); panLast = [x, y];
+    }
+    render();
+  }
+  function beginPinch() {
+    var p = ptArr();
+    pinch = { dist: Math.hypot(p[0][0] - p[1][0], p[0][1] - p[1][1]) || 1, mid: [(p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2] };
+    if (config.view === "globe") pinch.zoom0 = zoomFactor;
+    else { pinch.scale0 = projection.scale(); pinch.geoMid = projection.invert(pinch.mid); }
+  }
+  function pinchMove() {
+    var p = ptArr(); if (p.length < 2 || !pinch) return;
+    var d = Math.hypot(p[0][0] - p[1][0], p[0][1] - p[1][1]) || 1, ratio = d / pinch.dist;
+    var m = [(p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2];
+    if (config.view === "globe") {
+      zoomFactor = Math.max(1, Math.min(70, pinch.zoom0 * ratio)); projection.scale(baseScale * zoomFactor);
+    } else {
+      var ns = Math.max(worldFitScale * 0.85, Math.min(worldFitScale * 220, pinch.scale0 * ratio)); projection.scale(ns);
+      if (pinch.geoMid && isFinite(pinch.geoMid[0])) { var p2 = projection(pinch.geoMid), tr = projection.translate(); projection.translate([tr[0] + (m[0] - p2[0]), tr[1] + (m[1] - p2[1])]); }
+    }
+    render();
+  }
+  canvas.addEventListener("pointerdown", function (e) {
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
+    stopAnim(); canvas.classList.add("grabbing");
+    if (ptrs.size === 1) { tapStart = [e.offsetX, e.offsetY]; tapMoved = 0; beginSingle(e.offsetX, e.offsetY); }
+    else if (ptrs.size === 2) { tapStart = null; beginPinch(); }
   });
+  canvas.addEventListener("pointermove", function (e) {
+    if (!ptrs.has(e.pointerId)) return;
+    var prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
+    if (ptrs.size >= 2) pinchMove();
+    else { if (tapStart) tapMoved += Math.hypot(e.offsetX - prev[0], e.offsetY - prev[1]); singleMove(e.offsetX, e.offsetY); }
+  });
+  function endPointer(e) {
+    if (!ptrs.has(e.pointerId)) return;
+    var wasSingle = ptrs.size === 1;
+    ptrs.delete(e.pointerId);
+    try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (wasSingle && tapStart && tapMoved < 8 && config.mode === "find" && !resolved) {
+      var hit = pickCountry(tapStart[0], tapStart[1]); if (hit) handleClick(hit);
+    }
+    tapStart = null;
+    if (ptrs.size === 1) { var r = ptArr()[0]; beginSingle(r[0], r[1]); } // resume single after lifting a finger
+    else if (ptrs.size === 0) { pinch = null; canvas.classList.remove("grabbing"); }
+  }
+  canvas.addEventListener("pointerup", endPointer);
+  canvas.addEventListener("pointercancel", endPointer);
 
   // ---------------------------------------------------------------- regions
   var REGION_GROUPS = [
