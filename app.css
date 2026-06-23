@@ -83,19 +83,19 @@
   --info: #6a3fb0;
   --focus: #1453b0;
 
-  --map-ocean: #cfe3ee;
-  --map-ocean-light: #e2f0f7;
-  --map-land: #c3ccd4;
-  --map-land-dim: #dfe5ea;
-  --map-border: #98a6b2;
+  --map-ocean: #a3cde6;
+  --map-ocean-light: #bfe0f1;
+  --map-land: #e9e1cf;
+  --map-land-dim: #d7cdb6;
+  --map-border: #a4946f;
   --map-select: var(--map-blue);
-  --map-select-edge: #00405f;
-  --map-highlight: #b87600;
-  --map-highlight-edge: #7a4e00;
-  --map-locator: #b87600;
-  --map-graticule: rgba(0, 0, 0, 0.07);
-  --map-sphere-edge: rgba(40, 80, 110, 0.35);
-  --label-halo: rgba(238, 242, 246, 0.94);
+  --map-select-edge: #00324a;
+  --map-highlight: #e07a00;
+  --map-highlight-edge: #8a4b00;
+  --map-locator: #c85f00;
+  --map-graticule: rgba(0, 0, 0, 0.09);
+  --map-sphere-edge: rgba(30, 70, 100, 0.5);
+  --label-halo: rgba(243, 239, 230, 0.96);
   --shadow: 0 12px 40px rgba(20, 40, 60, 0.18);
 }
 

@@ -1,3 +1,13 @@
 {
-  "countries": ["FRA", "AUS"]
+  "intro": {
+    "title": "Comment taper une clope en Europe de l'Ouest",
+    "updated": "juin 2026",
+    "sections": [
+      { "heading": "L'essentiel", "body": "Dans la plupart des pays d'Europe de l'Ouest, il ne faut PAS débarquer en balançant directement la demande en argot. Le réflexe authentique : ouvrir d'abord avec une petite formule de politesse ou d'excuse, et SEULEMENT ENSUITE demander, idéalement avec une forme verbale adoucie.\n\nCette ouverture est obligatoire ou fortement attendue en France, en Belgique francophone, au Royaume-Uni et en Italie ; attendue mais plus légère en Allemagne, Espagne, Portugal, Pays-Bas, Suisse, Autriche, Luxembourg et Irlande ; et souvent abandonnée seulement dans les contextes très décontractés des jeunes et de la rue (Allemagne, Autriche)." },
+      { "heading": "En résumé", "body": "L'ouverture est l'élément clé : en France, « Excuse-moi, t'aurais pas une clope ? » (formule de politesse + conditionnel adoucissant « t'aurais », pas le sec « t'as »).\nUne cigarette roulée à la main = « une roulée » (jamais « une clope roulée »).\nL'argot varie énormément : Kippe (DE), Zigi (CH allemand), fag/rollie (UK/IE), pitillo/piti (ES), paglia (IT), peuk/shaggie (NL).\nFaux amis : « beata » = un MÉGOT en portugais ; « Stumpe » = un cigare en suisse ; « Tschigg » / « Tschick » est autrichien, pas suisse.\nLe prix conditionne l'étiquette : Irlande et Royaume-Uni sont les plus chers (proposer de payer est la norme) ; Espagne, Portugal, Luxembourg et Italie sont bon marché (on partage facilement)." },
+      { "heading": "Classement des prix (paquet de 20 Marlboro, 2025-2026)", "body": "1. Irlande : environ 18,94 €\n2. Royaume-Uni : environ 16,48 £ (~19 €)\n3. France : environ 13,00 €\n4. Pays-Bas : environ 11,00 €\n5. Belgique : environ 9,90 €\n6. Suisse : environ 9,60 CHF\n7. Allemagne : environ 8,20 €\n8. Autriche : environ 7,90 €\n9. Italie : environ 6,00 à 6,20 €\n10. Portugal : environ 6,00 €\n11. Luxembourg : environ 5,80 €\n12. Espagne : environ 5,30 à 6,00 €" },
+      { "heading": "À retenir", "body": "Apprends un mot d'argot + une ouverture par pays plutôt que des phrases entières : c'est cette combinaison (« Exgüsi... Zigi », « Entschuldigung... Kippe », « Perdona... pitillo ») qui te fait sonner local et poli en même temps. Les prix sont des instantanés 2025-2026 et fluctuent." }
+    ]
+  },
+  "countries": ["FRA", "BEL", "NLD", "LUX", "DEU", "CHE", "AUT", "GBR", "IRL", "ESP", "PRT", "ITA"]
 }

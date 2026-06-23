@@ -22,7 +22,7 @@
 .info-article { max-width: 70ch; }
 .info-article h2 { margin: 0 0 4px; font-size: 24px; }
 .info-article h3 { margin: 22px 0 6px; font-size: 17px; color: var(--accent); }
-.info-article p { line-height: 1.6; margin: 8px 0; }
+.info-article p { line-height: 1.6; margin: 8px 0; white-space: pre-line; }
 .info-updated { font-size: 13px; margin: 0 0 12px; }
 .info-sources { padding-left: 20px; }
 .info-sources li { margin: 4px 0; }

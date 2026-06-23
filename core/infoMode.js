@@ -32,7 +32,7 @@ export function makeInfoMode(descriptor) {
 }
 
 async function build(ctx, descriptor) {
-  injectCss("info-css", "core/infomode.css?v=1");
+  injectCss("info-css", "core/infomode.css?v=2");
   const base = descriptor.base.replace(/\/?$/, "/");
   const { byId } = await loadAnswers();
   if (ctx.signal.aborted) return { relang() {}, selectFrom() {} };
@@ -142,7 +142,11 @@ async function build(ctx, descriptor) {
     panel.append(a);
   }
 
-  function showPlaceholder() { clear(panel); panel.append(el("p", { class: "info-choose muted" }, s("choose"))); }
+  function showPlaceholder() {
+    clear(panel);
+    if (manifest && manifest.intro) { renderArticle(manifest.intro, ""); panel.append(el("p", { class: "info-choose muted" }, s("choose"))); }
+    else panel.append(el("p", { class: "info-choose muted" }, s("choose")));
+  }
 
   // ---- init + deep link ----
   function selectFrom(params) {

@@ -1,17 +1,15 @@
 {
-  "title": { "en": "Cigarette tax in <Country>", "fr": "Taxe sur la cigarette en <Pays>" },
-  "updated": "2026-06",
+  "title": "Pays 🏳",
+  "updated": "juin 2026",
   "sections": [
-    {
-      "heading": { "en": "Overview", "fr": "Aperçu" },
-      "body": { "en": "One or more paragraphs. Separate paragraphs with a blank line.", "fr": "Un ou plusieurs paragraphes. Sépare les paragraphes par une ligne vide." }
-    },
-    {
-      "heading": { "en": "Tax breakdown", "fr": "Détail de la taxe" },
-      "body": { "en": "...", "fr": "..." }
-    }
+    { "heading": "Ouverture", "body": "Comment ouvrir poliment avant de demander." },
+    { "heading": "La demande", "body": "Les phrases pour demander, du plus poli au plus relâché.\nUtilise un retour à la ligne simple pour une nouvelle ligne, une ligne vide pour un nouveau paragraphe." },
+    { "heading": "Argot", "body": "Les mots locaux pour cigarette, roulée, taper... et les faux amis." },
+    { "heading": "Prononciation", "body": "La prononciation approximative à la française." },
+    { "heading": "Prix", "body": "Prix indicatif d'un paquet." },
+    { "heading": "Acceptabilité sociale", "body": "Dans quels contextes c'est normal ou non." }
   ],
   "sources": [
-    { "label": { "en": "Source name", "fr": "Nom de la source" }, "url": "https://example.org" }
+    { "label": "Nom de la source", "url": "https://example.org" }
   ]
 }

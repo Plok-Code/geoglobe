@@ -99,7 +99,7 @@ async function build(ctx) {
     info.append(
       el("button", { class: "atlas-info-close icon-btn", type: "button", "aria-label": tt("close"), onClick: deselect }, "✕"),
       el("h3", { class: "atlas-info-name" }, displayName(id)),
-      showCapital(id) ? el("p", { class: "atlas-info-cap" }, [el("span", { class: "muted" }, tt("capital") + ": "), capName(id)]) : null,
+      el("p", { class: "atlas-info-cap" }, [el("span", { class: "muted" }, tt("capital") + ": "), capName(id)]),
       chips.length ? el("div", { class: "atlas-info-chips" }, chips) : null,
     );
     info.hidden = false;
@@ -107,10 +107,9 @@ async function build(ctx) {
 
   // ---- labels ----
   function makeLabel(id) {
-    const name = displayName(id), cap = capName(id);
-    const b = el("button", { class: "atlas-label", type: "button", "data-id": id, "aria-label": name + (showCapital(id) ? ", " + cap : "") }, [
+    const name = displayName(id);
+    const b = el("button", { class: "atlas-label", type: "button", "data-id": id, "aria-label": name }, [
       el("span", { class: "al-name" }, name),
-      showCapital(id) ? el("span", { class: "al-cap" }, cap) : null,
     ]);
     b.addEventListener("click", (e) => { e.stopPropagation(); select(id); }, { signal: ctx.signal });
     return b;
@@ -138,7 +137,6 @@ async function build(ctx) {
       if (a[0] < -40 || a[0] > W + 40 || a[1] < -40 || a[1] > H + 40) continue;
       vis.push({ id, ax: a[0], ay: a[1] });
     }
-    if (continent === "world" && vis.length > 120) { vis.sort((p, q) => area(q.id) - area(p.id)); vis.length = 120; }
     if (selectedId && vis.every((v) => v.id !== selectedId)) {
       const c = byId[selectedId].center;
       if (!(view === "globe" && !engine.isFrontFacing(c))) { const a = engine.project(c); if (a && isFinite(a[0])) vis.push({ id: selectedId, ax: a[0], ay: a[1] }); }
