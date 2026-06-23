@@ -278,14 +278,14 @@
   function frameCountry(id, animate) {
     if (config.view === "map") {
       projection.fitExtent([[40, 40], [W - 40, H - 40]], featureById[id]);
-      if (projection.scale() > worldFitScale * 22) projection.scale(worldFitScale * 22);
+      if (projection.scale() > worldFitScale * 60) projection.scale(worldFitScale * 60);
       // recenter on the country (fitExtent's translate is stale after clamping the scale)
       var sp = projection(byId[id].center), tr = projection.translate();
       if (sp && isFinite(sp[0])) projection.translate([tr[0] + (W / 2 - sp[0]), tr[1] + (H / 2 - sp[1])]);
       render(); return;
     }
     var span = countrySpan(featureById[id].geometry);
-    zoomFactor = Math.max(1.1, Math.min(6, 26 / Math.max(span, 4)));
+    zoomFactor = Math.max(1.1, Math.min(30, 26 / Math.max(span, 0.6)));
     projection.scale(baseScale * zoomFactor);
     rotateTo(byId[id].center, animate);
   }
@@ -340,10 +340,10 @@
     e.preventDefault();
     var k = e.deltaY < 0 ? 1.15 : 0.87;
     if (config.view === "globe") {
-      zoomFactor = Math.max(1, Math.min(12, zoomFactor * k)); projection.scale(baseScale * zoomFactor); render();
+      zoomFactor = Math.max(1, Math.min(70, zoomFactor * k)); projection.scale(baseScale * zoomFactor); render();
     } else {
       var p = [e.offsetX, e.offsetY], ll = projection.invert(p);
-      var ns = Math.max(worldFitScale * 0.85, Math.min(worldFitScale * 40, projection.scale() * k));
+      var ns = Math.max(worldFitScale * 0.85, Math.min(worldFitScale * 220, projection.scale() * k));
       projection.scale(ns);
       if (ll && isFinite(ll[0])) { var p2 = projection(ll), tr = projection.translate(); projection.translate([tr[0] + (p[0] - p2[0]), tr[1] + (p[1] - p2[1])]); }
       render();
@@ -351,6 +351,27 @@
   }, { passive: false });
 
   // ---- click detection (find mode) ----
+  // Tiny countries are only a few pixels, so a click snaps to the nearest small country whose
+  // centroid is within SNAP_PX; otherwise we use exact polygon containment for the big ones.
+  var SNAP_PX = 26;
+  function pickCountry(sx, sy) {
+    var viewCenter = config.view === "globe" ? projection.invert([W / 2, H / 2]) : null;
+    var best = null, bestD2 = SNAP_PX * SNAP_PX;
+    for (var i = 0; i < currentOrder.length; i++) {
+      var id = currentOrder[i];
+      if (totalAreaEq(featureById[id].geometry) >= AREA_THRESHOLD) continue; // only small ones snap
+      var c = byId[id].center;
+      if (viewCenter && d3.geoDistance(viewCenter, c) > Math.PI / 2 * 0.98) continue; // back of globe
+      var sp = projection(c);
+      if (!sp) continue;
+      var dx = sp[0] - sx, dy = sp[1] - sy, d2 = dx * dx + dy * dy;
+      if (d2 < bestD2) { bestD2 = d2; best = id; }
+    }
+    if (best) return best;
+    var ll = projection.invert([sx, sy]);
+    if (ll && isFinite(ll[0])) for (var j = 0; j < currentOrder.length; j++) if (d3.geoContains(featureById[currentOrder[j]], ll)) return currentOrder[j];
+    return null;
+  }
   var downPt = null;
   canvas.addEventListener("pointerdown", function (e) { downPt = [e.offsetX, e.offsetY]; });
   canvas.addEventListener("pointerup", function (e) {
@@ -358,10 +379,7 @@
     var moved = Math.hypot(e.offsetX - downPt[0], e.offsetY - downPt[1]); downPt = null;
     if (moved > 6) return;
     if (config.mode !== "find" || resolved) return;
-    var ll = projection.invert([e.offsetX, e.offsetY]);
-    if (!ll || !isFinite(ll[0])) return;
-    var hit = null;
-    for (var i = 0; i < currentOrder.length; i++) { var id = currentOrder[i]; if (d3.geoContains(featureById[id], ll)) { hit = id; break; } }
+    var hit = pickCountry(e.offsetX, e.offsetY);
     if (hit) handleClick(hit);
   });
 
