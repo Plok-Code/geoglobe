@@ -1,0 +1,23 @@
+{
+  "title": { "en": "Cigarette tax in France", "fr": "Taxe sur la cigarette en France" },
+  "updated": "2026-06",
+  "sections": [
+    {
+      "heading": { "en": "Overview", "fr": "Aperçu" },
+      "body": {
+        "en": "[Sample article to be replaced.] Describe here how a pack of cigarettes is taxed in France: the share of taxes in the retail price, and how it has changed over time.",
+        "fr": "[Article d'exemple à remplacer.] Décris ici comment un paquet de cigarettes est taxé en France : la part des taxes dans le prix de vente, et son évolution dans le temps."
+      }
+    },
+    {
+      "heading": { "en": "Tax breakdown", "fr": "Détail de la taxe" },
+      "body": {
+        "en": "[Sample.] Excise duty, VAT, and any specific levies.\n\nAdd a second paragraph by leaving a blank line.",
+        "fr": "[Exemple.] Droit d'accise, TVA, et prélèvements spécifiques.\n\nAjoute un second paragraphe en laissant une ligne vide."
+      }
+    }
+  ],
+  "sources": [
+    { "label": { "en": "Add your sources here", "fr": "Ajoute tes sources ici" }, "url": "" }
+  ]
+}

@@ -49,6 +49,19 @@ export async function loadGeo() {
   return geoCache;
 }
 
+let answersCache = null;
+/** Load only the answers table (names/capitals/regions, ~50KB) without the 1MB geojson. */
+export async function loadAnswers() {
+  if (answersCache) return answersCache;
+  if (geoCache) { answersCache = { answers: geoCache.answers, byId: geoCache.byId }; return answersCache; }
+  if (!window.COUNTRY_ANSWERS) await loadScript("data/answers.js?v=" + V);
+  const answers = window.COUNTRY_ANSWERS;
+  const byId = {};
+  answers.forEach((a) => { byId[a.iso3] = a; });
+  answersCache = { answers, byId };
+  return answersCache;
+}
+
 /** ISO3 ids belonging to a region key ('world' = all). */
 export function idsForRegion(answers, region) {
   return answers

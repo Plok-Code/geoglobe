@@ -1,0 +1,17 @@
+{
+  "title": { "en": "Cigarette tax in <Country>", "fr": "Taxe sur la cigarette en <Pays>" },
+  "updated": "2026-06",
+  "sections": [
+    {
+      "heading": { "en": "Overview", "fr": "Aperçu" },
+      "body": { "en": "One or more paragraphs. Separate paragraphs with a blank line.", "fr": "Un ou plusieurs paragraphes. Sépare les paragraphes par une ligne vide." }
+    },
+    {
+      "heading": { "en": "Tax breakdown", "fr": "Détail de la taxe" },
+      "body": { "en": "...", "fr": "..." }
+    }
+  ],
+  "sources": [
+    { "label": { "en": "Source name", "fr": "Nom de la source" }, "url": "https://example.org" }
+  ]
+}

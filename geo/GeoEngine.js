@@ -27,6 +27,7 @@ export class GeoEngine {
     this.palette = opts.palette || {};
     this.reducedMotion = !!opts.reducedMotion;
     this.monochrome = !!opts.monochrome;
+    this.hlKey = opts.highlightColor === "select" ? "select" : "highlight";
 
     this.regionSet = null;       // {id:true} drawn-normal + pickable; null = all
     this.highlightId = null;
@@ -116,7 +117,7 @@ export class GeoEngine {
     if (!ids || !ids.length) ids = this.allIds;
     if (this.view === "map") {
       this.projection.fitExtent([[20, 20], [this.W - 20, this.H - 20]], this._fc(ids));
-      this.redraw(); return;
+      this.redraw(); this._emit("frameend"); return;
     }
     const center = sphericalMean(ids.map((id) => this.byId[id].center));
     let maxA = 0;
@@ -131,7 +132,7 @@ export class GeoEngine {
       if (this.projection.scale() > this.worldFitScale * 60) this.projection.scale(this.worldFitScale * 60);
       const sp = this.projection(this.byId[id].center), tr = this.projection.translate();
       if (sp && isFinite(sp[0])) this.projection.translate([tr[0] + (this.W / 2 - sp[0]), tr[1] + (this.H / 2 - sp[1])]);
-      this.redraw(); return;
+      this.redraw(); this._emit("frameend"); return;
     }
     const span = countrySpan(this.featureById[id].geometry);
     this.zoomFactor = Math.max(1.1, Math.min(30, 26 / Math.max(span, 0.6)));
@@ -147,7 +148,7 @@ export class GeoEngine {
     let t0 = -center[0]; const t1 = -center[1];
     while (t0 - r0[0] > 180) t0 -= 360; while (t0 - r0[0] < -180) t0 += 360;
     const p0 = r0[0], p1 = t0, q0 = r0[1], q1 = t1, g0 = r0[2] || 0, dur = 850;
-    const finish = () => { this._stopAnim(); this.projection.rotate([normLng(p1), q1, 0]); this.redraw(); };
+    const finish = () => { this._stopAnim(); this.projection.rotate([normLng(p1), q1, 0]); this.redraw(); this._emit("frameend"); };
     if (!animate || this.reducedMotion) { finish(); return; }
     this._anim = this.d3.timer((el) => {
       const tt = Math.min(1, el / dur), e = tt < 0.5 ? 2 * tt * tt : -1 + (4 - 2 * tt) * tt;
@@ -163,6 +164,7 @@ export class GeoEngine {
   setCursorPick(on) { this.canvas.classList.toggle("clickable", !!on); }
 
   // ---- geo queries ----
+  size() { return { W: this.W, H: this.H }; }
   project(lnglat) { return this.projection(lnglat); }
   invert(xy) { return this.projection.invert(xy); }
   isFrontFacing(lnglat) {
@@ -203,8 +205,8 @@ export class GeoEngine {
 
     if (this.highlightId && this.featureById[this.highlightId]) {
       ctx.beginPath(); path(this.featureById[this.highlightId]);
-      ctx.fillStyle = P.highlight; ctx.fill();
-      ctx.lineWidth = 1.2; ctx.strokeStyle = P.highlightEdge || P.selectEdge || "#fff"; ctx.stroke();
+      ctx.fillStyle = P[this.hlKey] || P.highlight; ctx.fill();
+      ctx.lineWidth = 1.6; ctx.strokeStyle = P[this.hlKey + "Edge"] || P.selectEdge || "#fff"; ctx.stroke();
     }
     if (this.locators.length) {
       ctx.lineWidth = 2.5; ctx.strokeStyle = P.locator || P.highlight; ctx.setLineDash([8, 6]);
@@ -277,6 +279,8 @@ export class GeoEngine {
     const cv = this.canvas;
     this._onWheel = (e) => {
       e.preventDefault();
+      this._emit("viewstart");
+      clearTimeout(this._wheelT); this._wheelT = setTimeout(() => this._emit("viewend"), 200);
       const k = e.deltaY < 0 ? 1.15 : 0.87;
       if (this.view === "globe") {
         this.zoomFactor = Math.max(1, Math.min(70, this.zoomFactor * k)); this.projection.scale(this.baseScale * this.zoomFactor); this.redraw();
@@ -292,6 +296,7 @@ export class GeoEngine {
       try { cv.setPointerCapture(e.pointerId); } catch (err) {}
       this._ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
       this._stopAnim(); cv.classList.add("grabbing");
+      if (this._ptrs.size === 1) this._emit("viewstart");
       if (this._ptrs.size === 1) { this._tapStart = [e.offsetX, e.offsetY]; this._tapMoved = 0; this._beginSingle(e.offsetX, e.offsetY); }
       else if (this._ptrs.size === 2) { this._tapStart = null; this._beginPinch(); }
     };
@@ -309,7 +314,7 @@ export class GeoEngine {
       if (wasSingle && this._tapStart && this._tapMoved < 8) this._emit("pick", this._pickCountry(this._tapStart[0], this._tapStart[1]));
       this._tapStart = null;
       if (this._ptrs.size === 1) { const r = this._ptArr()[0]; this._beginSingle(r[0], r[1]); }
-      else if (this._ptrs.size === 0) { this._pinch = null; cv.classList.remove("grabbing"); }
+      else if (this._ptrs.size === 0) { this._pinch = null; cv.classList.remove("grabbing"); this._emit("viewend"); }
     };
     cv.addEventListener("wheel", this._onWheel, { passive: false });
     cv.addEventListener("pointerdown", this._onDown);
@@ -321,6 +326,7 @@ export class GeoEngine {
   destroy() {
     this._stopAnim();
     if (this._resizeT) clearTimeout(this._resizeT);
+    if (this._wheelT) clearTimeout(this._wheelT);
     if (this._ro) this._ro.disconnect();
     window.removeEventListener("resize", this._onResize);
     const cv = this.canvas;
