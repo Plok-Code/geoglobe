@@ -165,6 +165,9 @@ export class GeoEngine {
 
   // ---- geo queries ----
   size() { return { W: this.W, H: this.H }; }
+  // How magnified vs a whole-world view (~1 = world, larger = zoomed in). Used to scale labels.
+  zoomK() { return this.view === "globe" ? this.zoomFactor : (this.worldFitScale ? this.projection.scale() / this.worldFitScale : 1); }
+  globeRadius() { return this.view === "globe" ? this.projection.scale() : Infinity; }
   project(lnglat) { return this.projection(lnglat); }
   invert(xy) { return this.projection.invert(xy); }
   isFrontFacing(lnglat) {

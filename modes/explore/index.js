@@ -40,7 +40,7 @@ async function build(ctx) {
   const capName = (id) => (getLang() === "fr" ? byId[id].cap_fr : byId[id].cap);
   const showCapital = (id) => { const c = capName(id); return c && norm(c) !== norm(displayName(id)); };
 
-  injectCss("explore-css", "modes/explore/explore.css?v=1");
+  injectCss("explore-css", "modes/explore/explore.css?v=2");
   const host = el("div", { class: "map-host" });
   ctx.root.append(host);
 
@@ -128,6 +128,12 @@ async function build(ctx) {
     clear(labelLayer); clear(leaderSvg);
     leaderSvg.setAttribute("viewBox", "0 0 " + W + " " + H); leaderSvg.setAttribute("width", W); leaderSvg.setAttribute("height", H);
 
+    // Scale label size with zoom: small when zoomed out (tidy), larger when zoomed in.
+    const k = engine.zoomK();
+    const fs = Math.max(7.5, Math.min(13.5, 6.6 + 2 * Math.log2(k + 1)));
+    host.style.setProperty("--atlas-font", fs.toFixed(1) + "px");
+    const R = engine.globeRadius(), cx = W / 2, cy = H / 2, limb = 0.84 * R;
+
     let ids = continent === "world" ? allIds : idsForRegion(answers, continent);
     const vis = [];
     for (let i = 0; i < ids.length; i++) {
@@ -135,6 +141,7 @@ async function build(ctx) {
       if (view === "globe" && !engine.isFrontFacing(c)) continue;
       const a = engine.project(c); if (!a || !isFinite(a[0])) continue;
       if (a[0] < -40 || a[0] > W + 40 || a[1] < -40 || a[1] > H + 40) continue;
+      if (view === "globe" && Math.hypot(a[0] - cx, a[1] - cy) > limb) continue; // drop labels near the globe edge
       vis.push({ id, ax: a[0], ay: a[1] });
     }
     if (selectedId && vis.every((v) => v.id !== selectedId)) {
@@ -145,7 +152,8 @@ async function build(ctx) {
     const elById = {};
     for (let i = 0; i < vis.length; i++) { const lab = makeLabel(vis[i].id); lab.style.left = "-9999px"; lab.style.visibility = "hidden"; labelLayer.append(lab); elById[vis[i].id] = lab; }
     const items = vis.map((v) => ({ id: v.id, ax: v.ax, ay: v.ay, w: elById[v.id].offsetWidth, h: elById[v.id].offsetHeight, area: area(v.id), forced: v.id === selectedId }));
-    const placements = placeLabels(items, W, H);
+    const maxR = Math.max(45, Math.min(140, 30 + 24 * k)); // shorter leaders when zoomed out -> fewer crossing lines
+    const placements = placeLabels(items, W, H, { maxR });
     const keep = {};
     for (let i = 0; i < placements.length; i++) {
       const p = placements[i], lab = elById[p.id]; keep[p.id] = 1;
