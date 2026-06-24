@@ -1,11 +1,26 @@
 {
-  "title": "Suisse 🇨🇭",
+  "title": "Suisse",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Suisse allemand (Zurich, Berne)", "body": "Très différent de l'allemand standard.\nOuverture : « Exgüsi » (le « excuse me » suisse caractéristique, du français « excusez ») ou, chez les jeunes, l'anglais « Sorry ».\nDemande : « Exgüsi, hesch mer e Zigi? » (« hesch » = « hast du »). « Zigi » est LE mot suisse pour cigarette.\nAttention : « Stumpe » désigne un cigare ou cigarillo en Suisse, pas une cigarette ; et « Tschigg » est autrichien ou tyrolien, PAS suisse. N'utilise ni l'un ni l'autre ici." },
-    { "heading": "Prononciation", "body": "« Exgüsi, hesch mer e Zigi? » : ègz-gu-zi, hèch mèr eu tsi-gui." },
-    { "heading": "Suisse romand et Suisse italien", "body": "Romandie : comme la France, « Excuse-moi / Pardon, t'aurais une clope ? » ; « tu peux me dépanner d'une clope ? » est naturel.\nTessin : comme l'Italie, « Scusa, hai una sigaretta? »." },
-    { "heading": "Prix", "body": "Marlboro environ 9,60 CHF (environ 9,30 €)." },
-    { "heading": "Acceptabilité sociale", "body": "Un vrai brise-glace social, surtout en soirée. « Hesch mer e Zigi? » n'est pas seulement une question mais un phénomène social : le premier échange de mots d'une nuit passée à danser." }
+    {
+      "heading": "Taxer une clope en Suisse",
+      "body": "Taxer une clope en Suisse, c'est non seulement accepté mais carrément un rituel social, surtout en soirée. Entre fumeurs, demander une cigarette à un inconnu passe tout seul : devant un bar, en boîte ou sur un trottoir nocturne, c'est même souvent le tout premier échange de mots d'une nuit passée à danser. Un vrai brise-glace, donc on ose plus facilement qu'ailleurs, à condition de rester poli et de viser quelqu'un qui a déjà sa clope au bec. Côté budget, le paquet de Marlboro tourne autour de 9,60 CHF (environ 9,30 €). À ce prix-là, on n'est pas dans le partage insouciant des pays à clopes bon marché : le paquet a une vraie valeur, on le protège un peu, et offrir une cigarette est un petit geste qui compte. D'où l'importance de demander gentiment, voire de proposer de dépanner en retour : plus le paquet coûte cher, plus on apprécie qu'on ne le quémande pas comme un dû. Attention, la Suisse parle plusieurs langues : la formule change selon qu'on se trouve en Suisse allemande, en Romandie ou au Tessin. Côté vocabulaire, « Zigi » est LE mot suisse pour cigarette en Suisse allemande, le « hesch » correspondant au « hast du » de l'allemand standard (« est-ce que tu as »), et le « Exgüsi » est le « excuse me » typiquement suisse, dérivé du français « excusez ». En Romandie, on parle français standard et le mot d'argot « clope » désigne familièrement la cigarette, tandis que « dépanner » sous-entend qu'on rend service et qu'on rendra peut-être la pareille. Deux faux amis à éviter absolument en Suisse allemande. D'abord, « Stumpe » : ça ne veut PAS dire cigarette, mais désigne un cigare ou un cigarillo en Suisse. Si tu demandes un « Stumpe », tu risques de te retrouver avec tout autre chose qu'une clope. Ensuite, « Tschigg » : ce mot est autrichien ou tyrolien, PAS suisse. Ne l'utilise pas ici, tu te trahirais aussitôt comme touriste mal renseigné. Le seul mot juste pour cigarette en Suisse allemande reste « Zigi »."
+    },
+    {
+      "heading": "Suisse allemande, version polie",
+      "body": "« Exgüsi, hesch mer e Zigi? » : mot à mot « Excuse-moi, tu m'as une petite clope ? », le « Exgüsi » adoucissant l'abordage. Prononciation : ègz-gu-zi, hèch mèr eu tsi-gui."
+    },
+    {
+      "heading": "Suisse allemande, version jeune relâchée",
+      "body": "« Sorry, hesch mer e Zigi? » : même demande mais avec un « Sorry » à l'anglaise à la place du « Exgüsi », en mode jeune et relâché. Prononciation : so-ri, hèch mèr eu tsi-gui."
+    },
+    {
+      "heading": "Romandie, façon France",
+      "body": "« Excuse-moi / Pardon, t'aurais une clope ? » : français standard, le conditionnel « t'aurais » adoucit la demande. Variante : « Tu peux me dépanner d'une clope ? »."
+    },
+    {
+      "heading": "Tessin, façon Italie",
+      "body": "« Scusa, hai una sigaretta? » : littéralement « Excuse-moi, tu as une cigarette ? », version standard et passe-partout. Prononciation : skou-za, aï ou-na si-ga-rèt-ta."
+    }
   ]
 }

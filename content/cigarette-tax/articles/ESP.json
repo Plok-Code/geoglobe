@@ -1,12 +1,26 @@
 {
-  "title": "Espagne 🇪🇸",
+  "title": "Espagne",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture", "body": "Un léger « Perdona » (informel) ou « Oye » (« hé » / « écoute ») ; les Espagnols sont directs et chaleureux, donc pas besoin d'excuse élaborée." },
-    { "heading": "La demande", "body": "Décontracté : « ¿Me das un pitillo? » ou « Oye, ¿tienes un cigarro? » (« cigarro » en Espagne = cigarette, pas cigare).\nCadrage généreux courant : « ¿Me invitas un piti? » (« piti » = abrégé de pitillo).\nPoli : « Perdona, ¿te sobra un cigarro? » (« il t'en reste une ? »)." },
-    { "heading": "Argot", "body": "Cigarette : pitillo / piti, cigarro (mot courant en Espagne). « Cigarrillo » est formel ou scolaire. « Taper » = « gorrear ». Une roulée = « un cigarro/pitillo de liar » (tabac à rouler = « tabaco de liar »)." },
-    { "heading": "Prononciation", "body": "« Perdona, ¿me das un pitillo? » : pèr-do-na, mé dass oun pi-ti-yo.\n« ¿Me invitas un piti? » : mé in-bi-tass oun pi-ti." },
-    { "heading": "Prix", "body": "Marlboro environ 5,30 à 6,00 €." },
-    { "heading": "Acceptabilité sociale", "body": "Très décontracté : forte culture du fumeur en terrasse. Demander chez les jeunes, en soirée et dans les bars est totalement normal ; les prix bas font qu'on partage volontiers." }
+    {
+      "heading": "Taxer une clope en Espagne",
+      "body": "Taxer une clope en Espagne, c'est l'une des choses les plus faciles et les plus naturelles du voyage. Les Espagnols sont directs et chaleureux, et il existe une forte culture du fumeur en terrasse : demander une cigarette à un inconnu chez les jeunes, en soirée ou dans les bars est totalement normal et ne choque personne. Pas besoin d'excuse élaborée, un petit mot suffit et on vous tend souvent le paquet sans sourciller. Côté budget, un paquet de Marlboro tourne autour de 5,30 à 6,00 €. Ce prix reste modéré à l'échelle de l'Europe de l'Ouest, et c'est précisément ce qui explique la générosité ambiante : comme le paquet ne coûte pas une fortune, on partage volontiers et on ne fait pas la grimace pour une cigarette dépannée. À l'inverse des pays où la clope hors de prix pousse à protéger son paquet ou à réclamer d'être payé, ici on dépanne de bon cœur. Côté vocabulaire, le mot à retenir pour cigarette est « pitillo » / « piti », ou « cigarro » (très courant en Espagne). Attention au faux ami : « cigarro » désigne bien une cigarette en Espagne, et non un cigare. « Cigarrillo », lui, fait formel ou scolaire. Pour « taper » une cigarette, le verbe argotique est « gorrear ». Et si vous cherchez une roulée, on dit « un cigarro/pitillo de liar », le tabac à rouler étant le « tabaco de liar »."
+    },
+    {
+      "heading": "La demande polie (« te sobra »)",
+      "body": "« Perdona, ¿te sobra un cigarro? » : « Pardon, il t'en reste une ? » ; le verbe « sobrar » (rester en trop) adoucit la demande. « Cigarro » en Espagne veut dire cigarette, et non cigare. Prononciation : pèr-do-na, té so-bra oun si-ga-rro."
+    },
+    {
+      "heading": "La demande standard (« ¿tienes un cigarro? »)",
+      "body": "« Oye, ¿tienes un cigarro? » : « Hé, tu as une cigarette ? » ; indicatif présent, sans conditionnel, le « Oye » servant d'accroche amicale. Prononciation : o-yé, tyé-ness oun si-ga-rro."
+    },
+    {
+      "heading": "La demande relâchée (« ¿me das un pitillo? »)",
+      "body": "« ¿Me das un pitillo? » : « Tu me donnes une clope ? » ; verbe « dar » (donner) à l'indicatif, plus direct que « te sobra ». « Pitillo » est le mot familier pour cigarette. Prononciation : mé dass oun pi-ti-yo."
+    },
+    {
+      "heading": "La version jeune généreuse (« ¿me invitas un piti? »)",
+      "body": "« ¿Me invitas un piti? » : « Tu m'en offres une ? » ; le verbe « invitar » (inviter, offrir) place l'autre en dépanneur généreux. « Piti » est l'abréviation familière de « pitillo ». Prononciation : mé in-bi-tass oun pi-ti."
+    }
   ]
 }

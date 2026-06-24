@@ -1,11 +1,18 @@
 {
-  "title": "Luxembourg 🇱🇺",
+  "title": "Luxembourg",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Pays trilingue", "body": "Un Luxembourgeois peut te demander en français (« Pardon, t'aurais une clope ? »), en allemand ou en luxembourgeois indifféremment (le français et l'allemand sont parlés quasi universellement)." },
-    { "heading": "En luxembourgeois", "body": "Ouverture : « Entschëllegt » (formel) / « Entschëlleg » (informel), ou le « Pardon » emprunté au français, les deux parfaitement naturels.\nDemande : « Entschëllegt, hues du eng Zigarett fir mech? » (« Tu as une cigarette pour moi ? ») ; pour une de rab : « hues du eng Zigarett iwwreg? ». Mot pour cigarette : Zigarett (féminin)." },
-    { "heading": "Prononciation", "body": "« Entschëllegt, hues du eng Zigarett? » : ènnt-che-lèkt, hou-ess dou eng tsi-ga-rètt." },
-    { "heading": "Prix", "body": "Marlboro environ 5,80 €, bon marché à l'échelle régionale, d'où le fort tourisme du tabac vers le Luxembourg." },
-    { "heading": "Acceptabilité sociale", "body": "Décontracté, multilingue, population internationale. Les prix bas font qu'on protège moins son paquet." }
+    {
+      "heading": "Taxer une clope au Luxembourg",
+      "body": "Taxer une clope au Luxembourg, c'est plutôt décontracté et bien accepté entre fumeurs. Le pays est minuscule, trilingue et hyper international, si bien que personne ne s'offusque qu'on aborde un inconnu dans la rue, sur une terrasse ou à la sortie d'un bar pour quémander une cigarette. L'étiquette est souple : on demande poliment, on remercie, et l'affaire est réglée. Le détail qui change tout, c'est le prix : un paquet de Marlboro tourne autour de 5,80 €, ce qui est bon marché à l'échelle régionale (d'où le fort tourisme du tabac vers le Grand-Duché). Comme le paquet ne coûte pas cher, on protège beaucoup moins son bien : un Luxembourgeois dépanne volontiers une cigarette sans la faire payer, là où dans un pays au paquet hors de prix on aurait tendance à serrer son paquet et à proposer de rembourser. Côté argot, le mot « clope » est le terme courant pour cigarette. En luxembourgeois, le mot pour cigarette est « Zigarett » (féminin). Comme le français et l'allemand sont parlés par presque tout le monde, un Luxembourgeois peut tout aussi bien basculer dans l'une ou l'autre langue selon son interlocuteur."
+    },
+    {
+      "heading": "En français (la demande passe-partout)",
+      "body": "« Pardon, t'aurais une clope ? » : déjà en français : « Pardon » ouvre poliment, le conditionnel « t'aurais » adoucit la requête au lieu d'un « tu as » frontal ; « clope » = cigarette."
+    },
+    {
+      "heading": "En luxembourgeois (entre locaux)",
+      "body": "« Entschëllegt, hues du eng Zigarett fir mech ? » : mot à mot « Pardon, tu as une cigarette pour moi ? » : « hues du » = « est-ce que tu as », « fir mech » = « pour moi » (personnalise gentiment la requête) ; on ouvre par « Entschëllegt » (formel) ou « Entschëlleg » (informel), le « Pardon » français marchant aussi. Variante pour une cigarette en rab : « hues du eng Zigarett iwwreg ? » (« il t'en reste une de trop ? »). Prononciation : ènnt-che-lèkt, hou-ess dou eng tsi-ga-rètt."
+    }
   ]
 }

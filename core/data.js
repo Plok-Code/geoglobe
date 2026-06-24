@@ -4,7 +4,7 @@
 import { rewind } from "../geo/geometry.js";
 import { norm } from "./text.js";
 
-const V = "11"; // data cache-buster (matches data/*.js?v=)
+const V = "12"; // data cache-buster (matches data/*.js?v=)
 let geoCache = null;
 
 function loadScript(src) {

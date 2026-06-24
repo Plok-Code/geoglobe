@@ -3,10 +3,9 @@
 import { createStore } from "./store.js";
 
 const KEY = "geoglobe.settings";
-const browserLang = (navigator.language || "en").slice(0, 2) === "fr" ? "fr" : "en";
 
 const DEFAULTS = {
-  lang: browserLang,   // 'en' | 'fr'
+  lang: "fr",          // 'fr' | 'en' — French is the default; English is opt-in
   theme: "system",     // 'system' | 'dark' | 'light' | 'hc'
   motion: "system",    // 'system' | 'full' | 'reduced'
   lastRoute: "",       // restore "Continue" on the hub

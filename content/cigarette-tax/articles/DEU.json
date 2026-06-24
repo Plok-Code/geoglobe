@@ -1,11 +1,26 @@
 {
-  "title": "Allemagne 🇩🇪",
+  "title": "Allemagne",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture", "body": "« Entschuldigung » est le standard poli. Dans les contextes jeunes ou de rue, on le laisse souvent tomber et on passe direct à la demande en argot, ou on lâche un rapide « Hey » / « Sorry »." },
-    { "heading": "La demande (du plus poli au plus relâché)", "body": "Très poli (vouvoiement « Sie ») : « Entschuldigung, haben Sie eine Zigarette? »\nPoli (tutoiement « du ») : « Hast du eine Zigarette? »\nDécontracté : « Hast du mal 'ne Kippe? »\nTrès local : « Haste mal 'ne Kippe? »" },
-    { "heading": "Argot", "body": "Cigarette : Kippe (argot courant ; littéralement aussi « mégot »), Fluppe (très familier, régional), Glimmstängel (blagueur, vieillot).\nUne roulée à la main : « eine Selbstgedrehte » (ou « eine Gedrehte ») ; le tabac à rouler : « Drehtabak »." },
-    { "heading": "Prononciation", "body": "« Haste mal 'ne Kippe? » : ass-teu mal neu kip-eu.\n« Entschuldigung, hast du eine Zigarette? » : ènnt-choul-di-goung, asst dou aïn-eu tsi-ga-rètt-eu." },
-    { "heading": "Prix et acceptabilité", "body": "Marlboro environ 8,20 €. Très normal en soirée, devant les clubs et les bars, en festival, chez les étudiants : « Haste mal 'ne Kippe? » est presque un cliché de la vie de rue berlinoise. Moins approprié envers les personnes âgées ou en contexte formel." }
+    {
+      "heading": "Taxer une clope en Allemagne",
+      "body": "Taxer une clope en Allemagne, c'est carrément banal, surtout entre fumeurs et dans les contextes jeunes. Demandée poliment, la cigarette se prête sans drame : en soirée devant les clubs et les bars, en festival ou chez les étudiants, lancer la question est presque un cliché de la vie de rue berlinoise. C'est en revanche moins approprié envers les personnes âgées ou dans un cadre formel, où l'on garde ses distances et son paquet. Le paquet de Marlboro tourne autour de 8,20 €, un tarif assez élevé qui explique le réflexe : quand le paquet coûte cher, beaucoup protègent leur stock et préfèrent qu'on paye, alors qu'à prix doux on partage de bon cœur. En Allemagne, le partage reste malgré tout courant entre fumeurs, à condition que la demande soit faite avec un minimum de tact. Côté argot, « Kippe » est le mot courant pour cigarette, mais attention au faux ami, car il signifie aussi littéralement « mégot ». « Fluppe » est très familier et régional. « Glimmstängel » est blagueur et un brin vieillot. Pour une roulée à la main, on demande « eine Selbstgedrehte » (ou simplement « eine Gedrehte »), et le tabac à rouler se dit « Drehtabak »."
+    },
+    {
+      "heading": "La demande très polie (vouvoiement)",
+      "body": "« Entschuldigung, haben Sie eine Zigarette? » : Pardon, avez-vous une cigarette ? « Sie » est le vouvoiement de politesse et « haben Sie » la forme respectueuse de « avez-vous » : net et déférent. Prononciation : ènnt-choul-di-goung, ha-beunn zi aïn-eu tsi-ga-rètt-eu."
+    },
+    {
+      "heading": "La demande polie (tutoiement)",
+      "body": "« Hast du eine Zigarette? » : As-tu une cigarette ? Le « du » tutoie l'interlocuteur : direct, mais amical. Prononciation : asst dou aïn-eu tsi-ga-rètt-eu."
+    },
+    {
+      "heading": "La demande décontractée",
+      "body": "« Hast du mal 'ne Kippe? » : T'aurais une clope ? Le petit « mal » adoucit façon « par hasard / une fois », et « 'ne » est la contraction relâchée de « eine ». Prononciation : asst dou mal neu kip-eu."
+    },
+    {
+      "heading": "La demande très locale (version relâchée)",
+      "body": "« Haste mal 'ne Kippe? » : T'as une clope ? « Haste » est la fusion orale de « hast du », parler de rue très détendu. Prononciation : ass-teu mal neu kip-eu."
+    }
   ]
 }

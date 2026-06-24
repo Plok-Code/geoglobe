@@ -1,11 +1,18 @@
 {
-  "title": "Autriche 🇦🇹",
+  "title": "Autriche",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture", "body": "« Entschuldigung » ou la version dialectale « Tschuldigung » ; en contexte jeune, souvent abandonnée." },
-    { "heading": "La demande", "body": "L'allemand standard fonctionne (« Hast du eine Zigarette? »), mais le mot authentiquement autrichien pour cigarette est « Tschick ».\nDécontracté : « Host a Tschick? » (« Tu as une clope ? » en dialecte)." },
-    { "heading": "Prononciation", "body": "« Host a Tschick? » : hosst a tchik.\n« Entschuldigung, host a Tschick? » : ènnt-choul-di-goung, hosst a tchik." },
-    { "heading": "Prix", "body": "Marlboro environ 7,90 €." },
-    { "heading": "Acceptabilité sociale", "body": "Décontracté, surtout chez les jeunes et en soirée ; « Tschick » est de l'argot jeune viennois et autrichien." }
+    {
+      "heading": "Taxer une clope en Autriche",
+      "body": "Taxer une clope en Autriche, c'est quelque chose d'assez décontracté, surtout chez les jeunes et en soirée : entre fumeurs, devant un bar viennois ou à la sortie d'un club, demander une cigarette à un inconnu ne choque personne et passe pour un geste banal de la nuit. C'est moins une affaire de rue en plein jour qu'une habitude nocturne et amicale, le genre de petit service qu'on rend volontiers quand l'ambiance est relâchée. Côté budget, un paquet de Marlboro tourne autour de 7,90 €. À ce prix-là, on n'est pas dans le paquet qu'on protège jalousement comme dans les pays les plus taxés, mais on n'est pas non plus dans la cigarette qu'on donne sans y penser : l'Autrichien partage assez facilement, surtout entre jeunes et dans le feu d'une soirée, tout en gardant en tête que chaque clope a un coût. Plus un paquet est cher, plus on a tendance à protéger son bien et à proposer de payer ; ici, le prix modéré rend le partage naturel sans le banaliser complètement. Le mot à retenir, c'est « Tschick » : c'est l'argot jeune viennois et autrichien pour « cigarette », l'équivalent de notre « clope ». Maîtriser ce seul mot suffit à passer pour un local plutôt que pour un touriste qui récite son manuel d'allemand. Attention au faux ami : « Tschick » est bien autrichien, et non suisse. Ne le confonds pas avec les variantes employées ailleurs dans la sphère germanique : ce terme appartient à l'Autriche, pas au vocabulaire des fumeurs d'outre-frontière."
+    },
+    {
+      "heading": "La demande polie en allemand standard",
+      "body": "« Entschuldigung, hast du eine Zigarette? » : mot à mot « Excuse-moi, as-tu une cigarette ? », direct mais courtois grâce au « Entschuldigung » qui ouvre l'échange. Variante dialectale plus chaleureuse du « Entschuldigung » : « Tschuldigung ». Prononciation : ènnt-choul-di-goung, hasst dou aïne tsi-ga-rète-eu."
+    },
+    {
+      "heading": "La demande décontractée en dialecte autrichien",
+      "body": "« Host a Tschick? » : version dialectale de « Hast du eine Zigarette? » (« Host » pour « hast », « a » pour « eine », « Tschick » pour « cigarette »), mot à mot « T'as une clope ? », sans formule de politesse. Prononciation : hosst a tchik. Version polie en dialecte : « Entschuldigung, host a Tschick? », soit ènnt-choul-di-goung, hosst a tchik."
+    }
   ]
 }

@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mapshaper": "^0.6.95"
+    "d3-geo": "^3.1.1",
+    "mapshaper": "^0.6.95",
+    "topojson-client": "^3.1.0"
   }
 }

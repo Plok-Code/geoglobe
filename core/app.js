@@ -38,11 +38,11 @@ function buildShell() {
 
   const backBtn = el("a", { class: "icon-btn back-btn", href: "#/", "aria-label": t("nav.home"), title: t("nav.home") }, "←");
   const homeLink = el("a", { class: "brand", href: "#/", "aria-label": t("nav.home") }, [
-    el("span", { class: "brand-mark", "aria-hidden": "true" }, "◉"),
+    el("img", { class: "brand-logo", src: "assets/logo.png?v=1", alt: "Plok Voyage", width: "34", height: "34" }),
     el("span", { class: "brand-name" }, t("app.name")),
   ]);
   const title = el("h1", { class: "mode-title", id: "mode-title" }, "");
-  const settingsBtn = el("button", { class: "icon-btn settings-btn", type: "button", "aria-haspopup": "dialog", "aria-label": t("nav.settings"), title: t("nav.settings") }, "⚙");
+  const settingsBtn = el("button", { class: "icon-btn settings-btn", type: "button", "aria-haspopup": "dialog", "aria-label": t("nav.settings"), title: t("nav.settings"), html: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.8 7.8 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L14 2H10l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4L3.6 11a7.8 7.8 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 1.7 1L10 22h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.4Z"/></svg>' });
   settingsBtn.addEventListener("click", openSettings);
 
   const header = el("header", { class: "app-header" }, [
@@ -75,7 +75,7 @@ function setHeader(entry, mode) {
   const titleText = (mode && mode.title && mode.title()) || t(entry.labelKey);
   shell.title.textContent = entry.id === "home" ? "" : titleText;
   shell.backBtn.hidden = entry.id === "home";
-  document.title = entry.id === "home" ? t("app.name") : t("app.name") + " — " + titleText;
+  document.title = entry.id === "home" ? t("app.name") : t("app.name") + " - " + titleText;
 }
 
 function buildContext(entry, params, signal) {
@@ -172,9 +172,9 @@ function fillSettings(dialog) {
   dialog.append(el("div", { class: "dialog-body" }, [
     el("div", { class: "dialog-head" }, [
       el("h2", {}, t("settings.title")),
-      el("button", { class: "icon-btn", type: "button", "aria-label": t("nav.close"), onClick: close }, "✕"),
+      el("button", { class: "icon-btn", type: "button", "aria-label": t("nav.close"), onClick: close }, "×"),
     ]),
-    seg("settings.language", getLang(), [{ val: "en", label: "English" }, { val: "fr", label: "Français" }], (v) => setLang(v)),
+    seg("settings.language", getLang(), [{ val: "fr", label: "Français" }, { val: "en", label: "English" }], (v) => setLang(v)),
     seg("settings.theme", settings.get("theme"), [
       { val: "system", label: t("theme.system") }, { val: "dark", label: t("theme.dark") },
       { val: "light", label: t("theme.light") }, { val: "hc", label: t("theme.hc") },

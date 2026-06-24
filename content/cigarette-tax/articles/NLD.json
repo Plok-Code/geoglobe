@@ -1,11 +1,22 @@
 {
-  "title": "Pays-Bas 🇳🇱",
+  "title": "Pays-Bas",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture", "body": "Un léger « Sorry » ou « Hé, sorry » est typique ; les Néerlandais sont directs, donc on n'attend pas d'excuse élaborée." },
-    { "heading": "La demande", "body": "Décontracté : « Heb je een sigaret voor me? » ou très familièrement « Heb je een peuk? » (« peuk » = cigarette familière).\nPoli : « Mag ik een sigaret van je bietsen? » (« taper » = bietsen).\nLa roulée, très populaire vu les prix, est un « shaggie » (de « shag » = tabac à rouler) ; le tabac à rouler lui-même se dit « shag »." },
-    { "heading": "Prononciation", "body": "« Sorry, heb je een peuk? » : so-ri, hèp yeu eune peuk.\n« Heb je een sigaret voor me? » : hèp yeu eune si-ga-rèt foor meu." },
-    { "heading": "Prix", "body": "Marlboro environ 11,00 €, parmi les plus élevés de l'UE." },
-    { "heading": "Acceptabilité sociale", "body": "Normal chez les jeunes, en soirée et en festival. La roulée est la norme culturelle, donc se faire demander un « shaggie », des feuilles ou du tabac est courant." }
+    {
+      "heading": "Taxer une clope aux Pays-Bas",
+      "body": "Taxer une clope aux Pays-Bas, c'est plutôt bien accepté, surtout entre jeunes et entre fumeurs : on demande sans détour, parce que les Néerlandais sont directs et n'attendent aucune excuse élaborée. C'est totalement normal chez les jeunes, en soirée et en festival, et personne ne s'offusque qu'on vienne quémander. Gros bémol financier : un paquet de Marlboro tourne autour de 11,00 €, parmi les prix les plus élevés de l'UE. Du coup, deux réflexes : la cigarette toute faite est précieuse (on la protège, on propose volontiers de payer), tandis que la roulée est devenue la norme culturelle. Se faire demander une roulée, des feuilles ou du tabac est ici parfaitement courant, justement parce que ça revient bien moins cher que le paquet. Côté vocabulaire, vu les prix, la roulée est reine et a son propre lexique. Une cigarette roulée se dit « shaggie » (de « shag »), et le tabac à rouler lui-même se dit « shag ». Demander un « shaggie », des feuilles ou du « shag » est ici aussi banal que demander une cigarette toute faite ailleurs. À retenir aussi : « peuk » = clope (cigarette familière) et « bietsen » = taper / quémander."
+    },
+    {
+      "heading": "La demande polie (taper)",
+      "body": "« Sorry » ou « Hé, sorry » puis « Mag ik een sigaret van je bietsen? » : mot à mot « Puis-je te taper une cigarette ? » ; « bietsen » = taper / quémander, et « mag ik » (« puis-je / m'est-il permis ») adoucit en demande d'autorisation polie. Prononciation : « Sorry » : so-ri ; « Mag ik een sigaret van je bietsen? » : mar-ik eune si-ga-rèt fan yeu bit-seun."
+    },
+    {
+      "heading": "La demande décontractée",
+      "body": "« Heb je een sigaret voor me? » : « As-tu une cigarette pour moi ? » ; demande directe, sans conditionnel, mais courtoise. Prononciation : hèp yeu eune si-ga-rèt foor meu."
+    },
+    {
+      "heading": "La version jeune et familière",
+      "body": "« Heb je een peuk? » (ou « Sorry, heb je een peuk? ») : « As-tu une clope ? » ; « peuk » = clope (cigarette familière), argot du quotidien entre fumeurs. Prononciation : « Sorry, heb je een peuk? » : so-ri, hèp yeu eune peuk."
+    }
   ]
 }

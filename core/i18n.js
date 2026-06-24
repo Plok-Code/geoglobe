@@ -24,9 +24,11 @@ const STRINGS = {
     "mode.home": "Home",
     "mode.learn": "Learn geography",
     "mode.explore": "Explore the map",
+    "mode.worldmap": "World map",
     "mode.tax": "Bumming a cigarette",
     "mode.learn.desc": "Quiz yourself on countries and capitals.",
     "mode.explore.desc": "An atlas with every country and capital labelled.",
+    "mode.worldmap.desc": "A real zoomable map (cities and all). Click a country to highlight it and see its capital.",
     "mode.tax.desc": "How to bum a cigarette from a stranger, country by country.",
     "group.learn": "Learn",
     "group.explore": "Explore",
@@ -62,9 +64,11 @@ const STRINGS = {
     "mode.home": "Accueil",
     "mode.learn": "Apprendre la géographie",
     "mode.explore": "Explorer la carte",
+    "mode.worldmap": "Carte du monde",
     "mode.tax": "Comment taxer une clope",
     "mode.learn.desc": "Teste-toi sur les pays et les capitales.",
     "mode.explore.desc": "Un atlas avec chaque pays et sa capitale.",
+    "mode.worldmap.desc": "Une vraie carte zoomable (villes comprises). Clique un pays pour le surligner et voir sa capitale.",
     "mode.tax.desc": "Quémander une cigarette à un inconnu, pays par pays.",
     "group.learn": "Apprendre",
     "group.explore": "Explorer",
@@ -81,7 +85,7 @@ const STRINGS = {
   },
 };
 
-let lang = settings.get("lang") || "en";
+let lang = settings.get("lang") || "fr";
 const subs = new Set();
 
 export function getLang() { return lang; }

@@ -1,11 +1,22 @@
 {
-  "title": "France 🇫🇷",
+  "title": "France",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture (obligatoire en pratique)", "body": "En français parlé réel, on ne se lance presque jamais directement dans la demande. On ouvre avec « Excuse-moi » (informel) ou « Pardon » avant de demander. Sauter cette étape sonne brusque, voire agressif. C'est l'élément le plus important et le plus authentique." },
-    { "heading": "La demande", "body": "On utilise le conditionnel pour adoucir.\nDécontracté (le plus idiomatique) : « Excuse-moi, t'aurais pas une clope ? » Le « pas » négatif + le conditionnel « t'aurais » donnent la forme la plus douce.\nUn peu plus poli : « Pardon, t'aurais une clope, s'il te plaît ? »\nSec, à éviter par défaut : « T'as une clope ? »" },
-    { "heading": "Argot", "body": "Cigarette : clope (le plus courant, féminin : « une clope »), aussi tige, garo (argot jeune issu de l'arabe maghrébin), sèche (plus ancien).\nUne cigarette roulée à la main, c'est « une roulée », PAS « une clope roulée ».\nPour en demander une : « Tu peux me rouler une clope ? » ; pour le tabac : « T'as du tabac à rouler ? »\n« Taper une clope » = demander une cigarette." },
-    { "heading": "Prix", "body": "Marlboro = 13,00 € au 1er janvier 2026 (contre 12,50 € en 2025), Marlboro Gold rigide à 13,50 €. Prix moyen pondéré officiel 2025 : environ 12,54 € le paquet de 20. La France est parmi les marchés les plus chers d'Europe." },
-    { "heading": "Acceptabilité sociale", "body": "Très normal en soirée, devant les bars, en festival, chez les étudiants et les jeunes. Plus gênant en contexte professionnel ou envers une personne âgée. Les prix élevés rendent les gens plus protecteurs de leur paquet ; proposer une pièce de 50 centimes est poli et généralement refusé d'un geste." }
+    {
+      "heading": "Taxer une clope en France",
+      "body": "Taxer une clope en France, c'est tout à fait courant et accepté entre fumeurs, à condition de respecter le code social. C'est très normal en soirée, devant les bars, en festival, chez les étudiants et les jeunes ; ça devient nettement plus gênant en contexte professionnel ou face à une personne âgée. La règle d'or, c'est l'ouverture : en français parlé réel, on ne se lance presque jamais directement dans la demande, on glisse d'abord un « Excuse-moi » (informel) ou un « Pardon ». Sauter cette étape sonne brusque, voire agressif : c'est l'élément le plus important et le plus authentique. Côté prix, le paquet est salé : un paquet de Marlboro coûte 13,00 € depuis le 1er janvier 2026 (contre 12,50 € en 2025), le Marlboro Gold rigide grimpe à 13,50 €, et le prix moyen pondéré officiel 2025 tourne autour de 12,54 € le paquet de 20. La France est parmi les marchés les plus chers d'Europe. Et c'est logique : plus le paquet est cher, plus les gens protègent leur bien. On taxe donc plus volontiers une clope qu'on n'en offre, et proposer une petite pièce de 50 centimes est un geste poli, généralement refusé d'un revers de main. Côté argot, la cigarette se dit « clope » (le plus courant, au féminin : « une clope »), mais aussi « tige », « garo » (argot jeune issu de l'arabe maghrébin) ou « sèche » (plus ancien). L'expression consacrée « taper une clope » signifie tout simplement demander une cigarette. Attention au faux ami : une cigarette roulée à la main, c'est « une roulée », surtout PAS « une clope roulée ». Pour en demander une : « Tu peux me rouler une clope ? » ; et pour le tabac : « T'as du tabac à rouler ? »."
+    },
+    {
+      "heading": "La demande polie",
+      "body": "« Pardon, t'aurais une clope, s'il te plaît ? » : le « Pardon » sert de sas de politesse, le conditionnel « t'aurais » adoucit la requête, le « s'il te plaît » referme poliment. Formule déjà en français, pas de prononciation à transcrire."
+    },
+    {
+      "heading": "La demande décontractée (la plus idiomatique)",
+      "body": "« Excuse-moi, t'aurais pas une clope ? » : la forme la plus douce : conditionnel « t'aurais » et négation polie « pas » qui laisse une porte de sortie facile. Formule déjà en français, pas de prononciation à transcrire."
+    },
+    {
+      "heading": "La demande sèche (à éviter par défaut)",
+      "body": "« T'as une clope ? » : indicatif « t'as », sans conditionnel ni négation polie : direct et un peu abrupt, registre relâché entre potes. Formule déjà en français, pas de prononciation à transcrire."
+    }
   ]
 }

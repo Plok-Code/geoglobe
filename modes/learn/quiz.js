@@ -12,15 +12,15 @@ const T = {
     subject: "What to guess", answerMode: "How to answer", region: "Region",
     subjCountries: "Countries", subjCapitals: "Capitals", modeType: "Type", modeFind: "Click",
     play: "Play", playAgain: "Play again", config: "Settings",
-    toGlobe: "🌐 Globe", toMap: "🗺 2D map",
+    toGlobe: "Globe", toMap: "2D map",
     progress: "Country", score: "Score", guess: "Guess", next: "Next →", results: "See results →",
     tries: "Tries: ", wrongAgain: "Wrong, try again", wrongLast: "Wrong, last try",
     correct: "Correct: ", answer: "Answer: ",
-    gameOver: "Game over", scored: "You scored", missed: "Missed", perfect: "Perfect game! 🎉",
+    gameOver: "Game over", scored: "You scored", missed: "Missed", perfect: "Perfect game!",
     phCountry: "Type the country...", phCapital: "Type the capital...",
     taskTypeCountry: "Which country is highlighted?", taskTypeCapital: "What is this country's capital?",
     taskFindCountry: "Find: ", taskFindCapital: "Which country's capital is ",
-    reg_world: "World 🌍", reg_africa: "Africa", reg_americas: "Americas (all)",
+    reg_world: "World", reg_africa: "Africa", reg_americas: "Americas (all)",
     reg_north_america: "North America", reg_south_america: "South America", reg_asia: "Asia (all)",
     reg_asia_east: "East Asia", reg_asia_southeast: "Southeast Asia", reg_asia_south: "South Asia",
     reg_asia_central: "Central Asia", reg_middle_east: "Middle East", reg_europe: "Europe (all)",
@@ -31,15 +31,15 @@ const T = {
     subject: "À deviner", answerMode: "Comment répondre", region: "Région",
     subjCountries: "Pays", subjCapitals: "Capitales", modeType: "Écrire", modeFind: "Cliquer",
     play: "Jouer", playAgain: "Rejouer", config: "Réglages",
-    toGlobe: "🌐 Globe", toMap: "🗺 Carte 2D",
+    toGlobe: "Globe", toMap: "Carte 2D",
     progress: "Pays", score: "Score", guess: "Valider", next: "Suivant →", results: "Voir les résultats →",
     tries: "Essais : ", wrongAgain: "Faux, réessaie", wrongLast: "Faux, dernier essai",
     correct: "Correct : ", answer: "Réponse : ",
-    gameOver: "Partie terminée", scored: "Score :", missed: "Ratés", perfect: "Sans-faute ! 🎉",
+    gameOver: "Partie terminée", scored: "Score :", missed: "Ratés", perfect: "Sans-faute !",
     phCountry: "Tape le pays...", phCapital: "Tape la capitale...",
     taskTypeCountry: "Quel est ce pays ?", taskTypeCapital: "Quelle est la capitale de ce pays ?",
     taskFindCountry: "Trouve : ", taskFindCapital: "Quel pays a pour capitale ",
-    reg_world: "Monde 🌍", reg_africa: "Afrique", reg_americas: "Amériques (toutes)",
+    reg_world: "Monde", reg_africa: "Afrique", reg_americas: "Amériques (toutes)",
     reg_north_america: "Amérique du Nord", reg_south_america: "Amérique du Sud", reg_asia: "Asie (toute)",
     reg_asia_east: "Asie de l'Est", reg_asia_southeast: "Asie du Sud-Est", reg_asia_south: "Asie du Sud",
     reg_asia_central: "Asie centrale", reg_middle_east: "Moyen-Orient", reg_europe: "Europe (toute)",
@@ -259,8 +259,8 @@ export async function createSession(ctx) {
   function finishRound(correct) {
     resolved = true;
     const label = answerLabel(targetId);
-    if (correct) { score++; h.score.textContent = String(score); h.feedback.textContent = "✓ " + tt("correct") + label; h.feedback.className = "feedback correct"; }
-    else { h.feedback.textContent = "✗ " + tt("answer") + label; h.feedback.className = "feedback reveal"; }
+    if (correct) { score++; h.score.textContent = String(score); h.feedback.textContent = "" + tt("correct") + label; h.feedback.className = "feedback correct"; }
+    else { h.feedback.textContent = "" + tt("answer") + label; h.feedback.className = "feedback reveal"; }
     ctx.announce((correct ? tt("correct") : tt("answer")) + label, !correct);
     results.push({ id: targetId, correct });
     h.attempts.textContent = ""; clearHint();
@@ -323,7 +323,7 @@ export async function createSession(ctx) {
       }
       if (resolved) {
         const last = results[results.length - 1], ok = last && last.correct;
-        h.feedback.textContent = (ok ? "✓ " + tt("correct") : "✗ " + tt("answer")) + answerLabel(targetId);
+        h.feedback.textContent = (ok ? "" + tt("correct") : "" + tt("answer")) + answerLabel(targetId);
         h.next.textContent = idx + 1 >= order.length ? tt("results") : tt("next");
       } else {
         setAttempts(MAX_ATTEMPTS - attempts);

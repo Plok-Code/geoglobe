@@ -1,12 +1,26 @@
 {
-  "title": "Italie 🇮🇹",
+  "title": "Italie",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture (attendue mais légère)", "body": "Ouvre avec « Scusa » (informel) / « Scusi » (formel). Les Italiens attendent un marqueur de courtoisie rapide, mais pas élaboré." },
-    { "heading": "La demande", "body": "Décontracté : « Scusa, hai una sigaretta? » ou « Hai da fumare? » (« t'as de quoi fumer ? »).\nEntre amis : « Hai una paglia? » (« paglia » = argot pour cigarette, littéralement « paille ») ou l'impératif amical « Dammi una paglia! »\nPoli : « Mi scusi, ha per caso una sigaretta? »" },
-    { "heading": "Argot", "body": "Cigarette : sigaretta (standard), paglia (argot courant), cicca (signifie aussi « mégot » ; régionalement une cigarette). « Taper » = « scroccare una sigaretta ». Roulée = « una sigaretta rollata » ; tabac à rouler = « tabacco da rollare »." },
-    { "heading": "Prononciation", "body": "« Scusa, hai una sigaretta? » : skou-za, aïe ou-na si-ga-rètt-a.\n« Hai una paglia? » : aïe ou-na pal-ya." },
-    { "heading": "Prix", "body": "Marlboro environ 6,00 à 6,20 € (une hausse d'accises en janvier 2025 a ajouté 10 à 30 centimes par paquet)." },
-    { "heading": "Acceptabilité sociale", "body": "Normal et chaleureux : « scroccare una sigaretta » a une forte valeur de brise-glace. Courant en soirée, devant les bars, chez les jeunes ; moins approprié envers les personnes âgées ou en contexte formel." }
+    {
+      "heading": "Taxer une clope en Italie",
+      "body": "Taxer une clope en Italie, c'est non seulement courant mais carrément chaleureux : « scroccare una sigaretta » (taper une cigarette) a une vraie valeur de brise-glace, surtout en soirée, devant les bars et chez les jeunes. On attend un petit marqueur de courtoisie rapide (un « Scusa » lancé en passant), mais rien d'élaboré : entre fumeurs, le geste est sympathique et se vit comme un mini-moment de complicité. La nuance d'étiquette : c'est parfait entre potes ou entre inconnus de la même tranche d'âge, mais beaucoup moins approprié envers les personnes âgées ou dans un contexte formel. Côté budget, le paquet de Marlboro tourne autour de 6,00 à 6,20 € (une hausse d'accises en janvier 2025 a ajouté 10 à 30 centimes par paquet). À ce prix-là, on n'est pas dans le registre du paquet précieux qu'on protège jalousement : la cigarette se partage volontiers, et taper une clope reste un petit rituel social bon enfant plutôt qu'un service qu'on hésite à demander. Côté argot, cigarette se dit sigaretta (standard) ou paglia (argot courant, « la paille »). Pour « taper » une cigarette, le verbe consacré est « scroccare una sigaretta ». Une roulée se dit « una sigaretta rollata », et le tabac à rouler « tabacco da rollare ». Attention au faux ami cicca : le mot signifie d'abord « mégot », mais régionalement il désigne aussi une cigarette entière, d'où la confusion possible."
+    },
+    {
+      "heading": "La demande polie (au vouvoiement)",
+      "body": "« Mi scusi, ha per caso una sigaretta? » : mot à mot « excusez-moi (forme formelle), auriez-vous par hasard une cigarette ? ». Le « per caso » (« par hasard ») joue le rôle d'adoucisseur. Prononciation : mi skou-zi, a pèr ca-zo ou-na si-ga-rètt-a."
+    },
+    {
+      "heading": "La demande décontractée (au tutoiement)",
+      "body": "« Scusa, hai una sigaretta? » : « excuse-moi (forme informelle), tu as une cigarette ? » ; poli mais détendu, sans le « per caso » cérémonieux. Prononciation : skou-za, aïe ou-na si-ga-rètt-a."
+    },
+    {
+      "heading": "La demande directe (« de quoi fumer »)",
+      "body": "« Hai da fumare? » : littéralement « tu as de quoi fumer ? » (« hai » = « tu as », « da fumare » = « de quoi fumer ») ; ne nomme même plus la cigarette. Prononciation : aïe da fou-ma-reu."
+    },
+    {
+      "heading": "La demande entre amis (version argot)",
+      "body": "« Hai una paglia? » : « t'as une clope ? » (« paglia » = littéralement « paille », argot courant pour « cigarette »). Variante intime à l'impératif amical : « Dammi una paglia! » : « file-moi une clope ! ». Prononciation : aïe ou-na pal-ya (et dam-mi ou-na pal-ya)."
+    }
   ]
 }

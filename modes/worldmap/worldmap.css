@@ -1,0 +1,74 @@
+/* World map (MapLibre + OpenFreeMap) */
+body[data-mode="worldmap"] .mode-root { overflow: hidden; }
+
+/* MapLibre adds the class .maplibregl-map to our host element, and maplibre-gl.css sets
+   `.maplibregl-map { position: relative }`. That stylesheet is injected after ours and has equal
+   specificity, so it would win and collapse the host to height 0 (blank map, no controls).
+   Beat it with a more specific selector so the host stays absolutely positioned and fills .mode-root. */
+body[data-mode="worldmap"] .wm-host { position: absolute; inset: 0; background: var(--bg); font: inherit; }
+.wm-error { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; }
+.wm-loading { position: absolute; inset: 0; z-index: 6; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--text-muted); background: var(--bg); }
+
+/* country info box (name + capital + class badge) */
+.wm-info {
+  position: absolute; left: 12px; bottom: 24px; z-index: 5;
+  width: min(300px, calc(100vw - 24px));
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 14px 16px; backdrop-filter: blur(8px);
+}
+.wm-info[hidden] { display: none; }
+.wm-info-close { position: absolute; top: 8px; right: 8px; min-width: 32px; height: 32px; font-size: 14px; }
+.wm-info-name { margin: 2px 28px 6px 0; font-size: 19px; }
+.wm-info-cap { margin: 0; font-size: 15px; }
+.wm-info-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin-bottom: 4px; }
+.wm-cls-un { background: rgba(254,106,51,.16); color: #FE6A33; }
+.wm-cls-observer { background: rgba(25,177,255,.16); color: #19B1FF; }
+.wm-cls-defacto { background: rgba(25,177,255,.16); color: #19B1FF; }
+.wm-cls-dependency { background: var(--surface-3); color: var(--text-muted); }
+.wm-cls-intl { background: rgba(255,255,255,.10); color: #c8d2db; }
+
+.wm-hint { color: var(--text-muted); font-size: 13px; align-self: center; }
+
+/* scope checkboxes (observers / de-facto) with a "?" help bubble */
+.wm-check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; padding: 0 4px; user-select: none; }
+.wm-check input { accent-color: var(--accent, #FE6A33); width: 16px; height: 16px; }
+.wm-help {
+  position: relative; display: inline-grid; place-items: center; width: 18px; height: 18px;
+  border-radius: 50%; background: var(--surface-3); color: var(--text-muted);
+  font-size: 12px; font-weight: 700; cursor: help; border: 1px solid var(--border);
+}
+.wm-help:hover, .wm-help:focus-visible { background: var(--accent); color: var(--on-accent); outline: none; }
+.wm-tip {
+  position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  width: max(260px, 22vw); max-width: 340px; z-index: 20;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 10px 12px;
+  font-size: 13px; font-weight: 400; line-height: 1.45; text-align: left;
+  opacity: 0; visibility: hidden; transition: opacity var(--t-fast); pointer-events: none;
+}
+.wm-help:hover .wm-tip, .wm-help:focus-visible .wm-tip { opacity: 1; visibility: visible; }
+
+/* region multi-select popover */
+.wm-region-panel {
+  position: absolute; top: 8px; left: 8px; z-index: 7; width: min(280px, calc(100vw - 16px));
+  max-height: calc(100% - 16px); overflow: auto;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 10px 12px; backdrop-filter: blur(8px);
+}
+.wm-region-panel[hidden] { display: none; }
+.wm-region-panel label { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 14px; border-radius: 6px; }
+.wm-region-panel label:hover { background: var(--surface-3); }
+.wm-region-panel input { accent-color: var(--accent, #FE6A33); width: 16px; height: 16px; }
+.wm-reg-all { font-weight: 700; border-bottom: 1px solid var(--border); margin-bottom: 4px; padding-bottom: 6px !important; }
+.wm-reg-group { margin-top: 4px; }
+.wm-reg-head { font-weight: 600; }
+.wm-reg-sub { padding-left: 22px !important; color: var(--text-muted); }
+
+/* keep MapLibre's controls/attribution legible over the dark shell */
+.wm-host .maplibregl-ctrl-attrib { font-size: 11px; }
+
+@media (max-width: 600px) {
+  .wm-info { left: 8px; right: 8px; bottom: 28px; width: auto; }
+  .wm-hint { display: none; }
+  .wm-region-panel { width: calc(100vw - 16px); }
+}

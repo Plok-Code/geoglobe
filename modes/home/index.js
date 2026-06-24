@@ -65,7 +65,7 @@ export default {
         const grid = el("div", { class: "card-grid" });
         list.forEach((m) => {
           grid.append(el("a", { class: "mode-card", href: "#/" + m.id }, [
-            el("span", { class: "card-icon", "aria-hidden": "true" }, iconFor(m.id)),
+            el("span", { class: "card-icon", "aria-hidden": "true", html: iconFor(m.id) }),
             el("span", { class: "card-text" }, [
               el("span", { class: "card-title" }, t(m.labelKey)),
               m.descKey ? el("span", { class: "card-desc" }, t(m.descKey)) : null,
@@ -85,5 +85,12 @@ export default {
 };
 
 function iconFor(id) {
-  return { learn: "🎓", explore: "🗺", "cigarette-tax": "🚬" }[id] || "▶";
+  const sv = (inner) => '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+  const I = {
+    learn: sv('<path d="M2 8.5 12 4l10 4.5L12 13Z"/><path d="M6 10.5V16c0 1.4 2.7 2.6 6 2.6s6-1.2 6-2.6v-5.5"/><path d="M22 8.5V14"/>'),
+    explore: sv('<path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14M15 6v14"/>'),
+    worldmap: sv('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>'),
+    "cigarette-tax": sv('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'),
+  };
+  return I[id] || sv('<circle cx="12" cy="12" r="8"/>');
 }

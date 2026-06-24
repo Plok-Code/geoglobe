@@ -15,6 +15,15 @@
   --ok-purple: #a78bfa;     /* info */
   --map-blue: #0072b2;      /* Okabe-Ito blue: single map selection color */
 
+  /* Plok Voyage brand palette (identité visuelle) */
+  --plok-orange: #FE6A33;
+  --plok-orange-strong: #E6531F;
+  --plok-amber: #FFAB40;
+  --plok-cream: #FFF9F2;
+  --plok-brown: #401A0D;
+  --plok-red: #FF2639;
+  --plok-blue: #19B1FF;
+
   --radius: 12px;
   --radius-sm: 9px;
   --radius-pill: 999px;
@@ -36,15 +45,15 @@
   --border: rgba(255, 255, 255, 0.10);
   --text: #e9eef3;
   --text-muted: #9aa7b3;
-  --accent: var(--ok-blue);
-  --accent-strong: #2a7fe6;
-  --on-accent: #07101c;
-  --highlight: var(--ok-amber);
-  --on-highlight: #1a1303;
+  --accent: var(--plok-orange);
+  --accent-strong: var(--plok-orange-strong);
+  --on-accent: #2a1505;
+  --highlight: var(--plok-amber);
+  --on-highlight: #2a1505;
   --success: var(--ok-teal);
   --danger: var(--ok-vermilion);
-  --info: var(--ok-purple);
-  --focus: #5aa9ff;
+  --info: var(--plok-blue);
+  --focus: var(--plok-amber);
 
   --map-ocean: #16384c;
   --map-ocean-light: #23586f;
@@ -73,15 +82,15 @@
   --border: rgba(10, 20, 30, 0.14);
   --text: #16202b;
   --text-muted: #5a6b78;
-  --accent: var(--ok-blue);
-  --accent-strong: #1559b5;
+  --accent: var(--plok-orange);
+  --accent-strong: var(--plok-orange-strong);
   --on-accent: #ffffff;
-  --highlight: #b87600;
-  --on-highlight: #ffffff;
+  --highlight: var(--plok-amber);
+  --on-highlight: #2a1505;
   --success: #0c7a5e;
   --danger: #b34700;
-  --info: #6a3fb0;
-  --focus: #1453b0;
+  --info: #0976b3;
+  --focus: var(--plok-orange-strong);
 
   --map-ocean: #a3cde6;
   --map-ocean-light: #bfe0f1;
@@ -179,8 +188,9 @@ body { overflow: hidden; }
   backdrop-filter: blur(8px); z-index: 100;
 }
 .header-left, .header-right { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--text); }
 .brand-mark { color: var(--accent); font-size: 20px; }
+.brand-logo { height: 34px; width: auto; display: block; }
 .brand-name { font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
 .mode-title {
   font-size: 16px; font-weight: 600; margin: 0; color: var(--text-muted);

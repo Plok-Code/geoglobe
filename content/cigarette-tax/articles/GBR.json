@@ -1,12 +1,22 @@
 {
-  "title": "Royaume-Uni 🇬🇧",
+  "title": "Royaume-Uni",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture (fortement attendue)", "body": "Les Britanniques adoucissent énormément leurs demandes. Ouvre avec « Excuse me » ou « Sorry », souvent avec l'adoucisseur final « at all » et/ou « mate ». La formule recommandée par les natifs : « Excuse me, but have you got a spare cigarette at all? », où « at all » atténue le dérangement." },
-    { "heading": "La demande", "body": "Poli : « Excuse me, have you got a spare cigarette at all? »\nDécontracté : « Got a fag, mate? » / « Any chance of a smoke? »\nAméricanisme compris aussi : « Can I bum a smoke (off you)? »" },
-    { "heading": "Argot", "body": "Cigarette : fag (le plus courant), ciggie/ciggy, smoke.\nUne roulée : « rollie » ; le tabac à rouler : « baccy ».\nProposer de l'argent (genre 50 pence) à un inconnu est l'étiquette correcte, généralement refusée d'un geste." },
-    { "heading": "Prononciation", "body": "« Excuse me, have you got a spare fag? » : iks-kiouze mi, hav you gott eu spère fag.\n« Got a fag, mate? » : gott eu faag, méïte." },
-    { "heading": "Prix", "body": "Paquet de 20 moyen : 16,48 £ (ONS) ; Marlboro Gold/Red 16,25 £, certaines marques premium au-dessus de 18 £. Parmi les marchés les plus chers du monde." },
-    { "heading": "Acceptabilité sociale", "body": "Le prix très élevé rend le fait de taper une clope socialement chargé : OK devant les pubs et clubs et en festival entre fumeurs, mais un refus (« sorry, last one ») est courant. Proposer de payer est la norme polie." }
+    {
+      "heading": "Taxer une clope au Royaume-Uni",
+      "body": "Taxer une clope au Royaume-Uni, c'est socialement chargé, parce qu'ici le paquet coûte une petite fortune. Comptez 16,48 £ pour un paquet de 20 standard (chiffre ONS), 16,25 £ pour des Marlboro Gold ou Red, et certaines marques premium grimpent au-dessus de 18 £ : on est parmi les marchés les plus chers du monde. Du coup, demander une cigarette ne se fait jamais à la légère, et un refus poli (« sorry, last one ») est tout à fait courant. Ça reste accepté entre fumeurs devant les pubs et les clubs, ou en festival, mais jamais en mode exigeant. Le lien prix-partage est limpide : quand le paquet est aussi cher, on protège son bien, et l'étiquette polie veut que vous proposiez de payer (une pièce de 50 pence à un inconnu, par exemple). Le geste est généralement refusé d'un revers de main, mais le proposer fait toute la différence. Et surtout, les Britanniques adoucissent énormément leurs demandes : on ouvre presque toujours par « Excuse me » ou « Sorry », et on cale un « mate » ou un « at all » pour atténuer le dérangement. Côté argot, pour « cigarette », le mot roi est « fag » (de loin le plus courant), suivi de « ciggie » (ou « ciggy ») et de « smoke ». Une cigarette roulée à la main se dit « rollie », et le tabac à rouler s'appelle « baccy ». Attention au faux ami pour les francophones et les Américains : au Royaume-Uni, « fag » désigne tout bonnement une cigarette, point."
+    },
+    {
+      "heading": "La demande polie et standard",
+      "body": "« Excuse me, but have you got a spare cigarette at all? » : « Excusez-moi, mais auriez-vous une cigarette en trop, par hasard ? » ; « spare » suppose un surplus et « at all » minimise le dérangement, comme un « si jamais » qui désamorce le refus. Variante : « Excuse me, have you got a spare cigarette at all? ». Prononciation (« Excuse me, have you got a spare fag? ») : iks-kiouze mi, hav you gott eu spère fag."
+    },
+    {
+      "heading": "La demande décontractée entre fumeurs",
+      "body": "« Got a fag, mate? » : « T'as une clope, mon pote ? » ; on fait sauter le « Have you » et « mate » (pote) installe une complicité immédiate. « Any chance of a smoke? » : « Des chances d'avoir une clope ? » ; question posée par la négative polie. Prononciation : gott eu faag, méïte."
+    },
+    {
+      "heading": "La version américanisée",
+      "body": "« Can I bum a smoke (off you)? » : « Je peux te taper une clope ? » ; « to bum » est l'exact équivalent de « taper » (quémander une cigarette gratuitement), et le « off you » optionnel précise « à toi ». Prononciation : kann aïe beume eu smôk off you."
+    }
   ]
 }

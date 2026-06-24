@@ -1,11 +1,22 @@
 {
-  "title": "Belgique 🇧🇪",
+  "title": "Belgique",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Français (Wallonie / Bruxelles)", "body": "Identique à la France : ouvrir avec « Excuse-moi » ou « Pardon », puis « t'aurais pas une clope ? ».\nNote : en français de Belgique, « avoir la clope » veut bizarrement dire « avoir peur », mais « une clope » désigne bien une cigarette." },
-    { "heading": "Néerlandais / flamand (Flandre)", "body": "Ouverture : « Sorry » ou « Excuseer », normal mais plus léger que l'exigence française.\nDemande : décontracté « Hebt ge een sigaretje? » (forme flamande « ge/gij », diminutif « -je » très naturel) ou « Heb je een sigaret? ». « Taper » = « bietsen ». En flamand, « fumer » se dit « smoren » ; une cigarette est aussi un « saffie » ou un « peuk »." },
-    { "heading": "Prononciation", "body": "« Sorry, hebt ge een sigaretje ? » se prononce à peu près : so-ri, hèpt reu eune si-ga-rèt-yeu." },
-    { "heading": "Communauté germanophone (Belgique de l'Est)", "body": "Comme l'allemand standard : « Entschuldigung, hast du eine Zigarette? »." },
-    { "heading": "Prix et acceptabilité", "body": "Marlboro environ 9,90 €. Décontracté en soirée ou en festival ; la forte culture des terrasses rend le fait de taper une clope dehors tout à fait normal." }
+    {
+      "heading": "Taxer une clope en Belgique",
+      "body": "Taxer une clope en Belgique, c'est largement accepté, surtout entre fumeurs et le soir : la forte culture des terrasses fait que tendre la main pour une cigarette dehors est tout à fait normal, et la chose passe sans souci en soirée comme en festival. C'est décontracté, mais ça reste un échange entre adultes : on demande poliment, on remercie, et entre potes on partage volontiers. Côté tarif, un paquet de Marlboro tourne autour de 9,90 €. À ce niveau de prix, le paquet n'est pas un trésor qu'on protège jalousement comme dans les pays les plus chers, mais ce n'est pas donné non plus : on dépanne sans broncher en soirée, et le geste élégant reste de proposer une pièce ou de rendre la pareille la prochaine fois. Côté argot, « clope » est le mot courant pour cigarette en français de Belgique. À retenir côté flamand : « taper » une cigarette se dit « bietsen », « fumer » se dit « smoren », et une cigarette s'appelle aussi un « saffie » ou un « peuk ». Petite subtilité belge, un faux ami à ne pas rater : en français de Belgique, « avoir la clope » ne veut pas dire avoir une cigarette mais « avoir peur ». En revanche, « une clope » reste bien, elle, une cigarette."
+    },
+    {
+      "heading": "Wallonie et Bruxelles (français)",
+      "body": "« Excuse-moi, t'aurais pas une clope ? » : déjà en français : demande adoucie par le conditionnel (« t'aurais »), exactement comme en France. Pas de prononciation à préciser."
+    },
+    {
+      "heading": "Flandre (néerlandais / flamand)",
+      "body": "« Hebt ge een sigaretje ? » (version typiquement flamande), ou plus neutre « Heb je een sigaret ? » : mot à mot « As-tu une petite cigarette ? » ; le « ge/gij » est le « tu » familier flamand et le diminutif « -je » rend la demande décontractée. Prononciation : so-ri, hèpt reu eune si-ga-rèt-yeu."
+    },
+    {
+      "heading": "Belgique de l'Est (germanophone)",
+      "body": "« Entschuldigung, hast du eine Zigarette ? » : littéralement « Excuse-moi, as-tu une cigarette ? » ; « hast du » tutoie sans détour. Prononciation : ènt-chouldi-goung, hast dou aïne tsi-ga-rètt-eu."
+    }
   ]
 }

@@ -1,12 +1,22 @@
 {
-  "title": "Irlande 🇮🇪",
+  "title": "Irlande",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture (décontractée, relationnelle)", "body": "L'anglais d'Irlande préfère « Sorry », « Here », ou une ouverture amicale comme « Story bud? » / « C'mere » plutôt qu'un « excuse me » raide. Le conditionnel « Would you have...? » est lui-même un marqueur de politesse hiberno-anglais." },
-    { "heading": "La demande", "body": "Décontracté : « Sorry, any chance of a smoke? » / « Can I get a fag off you? »\nPlus poli (hiberno-anglais) : « Would you have a spare smoke? »" },
-    { "heading": "Argot", "body": "Cigarette : fag (traditionnel, toujours courant) et de plus en plus smoke chez les jeunes ; rollie pour la roulée, ciggie aussi entendu." },
-    { "heading": "Prononciation", "body": "« Sorry, any chance of a smoke? » : so-ri, è-ni tchanns ov eu smôk.\n« Can I get a fag off you? » : kann aï guètt eu faag of you." },
-    { "heading": "Prix", "body": "Le plus cher de l'UE : environ 18,94 € le paquet de 20 en 2025 ; le budget 2026 a poussé la catégorie la plus vendue à environ 18,55 à 18,95 €. Accises les plus élevées de l'UE." },
-    { "heading": "Acceptabilité sociale", "body": "Normal chez les jeunes et en soirée malgré le prix ; le registre bavard irlandais rend la demande amicale. Comme au Royaume-Uni, le coût élevé fait que les refus arrivent." }
+    {
+      "heading": "Taxer une clope en Irlande",
+      "body": "Taxer une clope en Irlande, c'est tout à fait accepté entre fumeurs, surtout chez les jeunes et en soirée : le registre bavard et relationnel des Irlandais rend la demande naturellement amicale, et on aborde volontiers un inconnu avec un mot gentil plutôt qu'un « excuse me » raide. Le bémol, c'est le prix. L'Irlande affiche le paquet le plus cher de toute l'UE : environ 18,94 € le paquet de 20 en 2025, et le budget 2026 a poussé la catégorie la plus vendue autour de 18,55 à 18,95 €, avec les accises les plus élevées de l'Union. À ce tarif, on comprend que chaque cigarette compte : comme au Royaume-Uni, le coût élevé fait que les refus arrivent, donc on demande avec le sourire et sans insister. La règle est simple : plus le paquet est cher, plus on protège son bien et plus il est élégant de proposer un peu de monnaie en retour ; à l'inverse, dans les pays où le paquet est bon marché, on partage sans compter. En Irlande, on est clairement du côté du paquet précieux. Côté argot, la cigarette se dit traditionnellement « fag » : terme toujours courant et parfaitement banal pour désigner une clope, à ne surtout pas confondre avec son sens nord-américain, qui n'a rien à voir ici. Chez les jeunes, on entend de plus en plus « smoke ». La roulée, elle, se dit « rollie », et l'on croise aussi « ciggie » pour la cigarette."
+    },
+    {
+      "heading": "La demande polie (en journée, hiberno-anglais)",
+      "body": "« Would you have a spare smoke? » : mot à mot « auriez-vous une cigarette de rab ? ». Conditionnel marqueur de politesse hiberno-anglais, adouci par « Would you have...? » et « spare » (de rab, en trop). Prononciation : woud you av eu spère smôk."
+    },
+    {
+      "heading": "La demande décontractée (le soir, devant un bar)",
+      "body": "« Sorry, any chance of a smoke? » : littéralement « Pardon, une chance d'avoir une cigarette ? ». Le « Sorry » fait office d'ouverture polie et « any chance of...? » laisse poliment la porte de sortie d'un refus. Prononciation : so-ri, è-ni tchanns ov eu smôk."
+    },
+    {
+      "heading": "La demande relâchée (entre potes, version directe)",
+      "body": "« Can I get a fag off you? » : mot à mot « Je peux te prendre une clope ? ». Direct, sans conditionnel ; « get... off you » est familier et « fag » désigne la cigarette, sans connotation. Prononciation : kann aï guètt eu faag of you."
+    }
   ]
 }

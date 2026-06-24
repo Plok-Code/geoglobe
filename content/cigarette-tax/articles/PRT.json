@@ -1,12 +1,26 @@
 {
-  "title": "Portugal 🇵🇹",
+  "title": "Portugal",
   "updated": "juin 2026",
   "sections": [
-    { "heading": "Ouverture", "body": "« Desculpa » (informel) / « Desculpe » (formel), ou l'adresse amicale « Ó chefe » / « Ó amigo » en contexte décontracté." },
-    { "heading": "La demande", "body": "Décontracté : « Tens um cigarro? » / « Desculpa, tens um cigarro a mais? » (« une de rab »).\nPoli (vouvoiement « você ») : « Desculpe, tem um cigarro? »" },
-    { "heading": "Argot et faux ami", "body": "Mot pour cigarette : cigarro.\nFAUX AMI IMPORTANT : « beata » signifie un MÉGOT en portugais européen, PAS une cigarette. Ne l'utilise jamais pour demander une clope.\nTabac à rouler = « tabaco de enrolar » ; une roulée = « um cigarro enrolado »." },
-    { "heading": "Prononciation", "body": "« Desculpa, tens um cigarro? » : dech-koul-pa, tènch oun si-gar-rou." },
-    { "heading": "Prix", "body": "Marlboro environ 6,00 €." },
-    { "heading": "Acceptabilité sociale", "body": "Décontracté, surtout en soirée et chez les jeunes ; les formes d'adresse amicales (« ó chefe ») rendent la demande informelle et bon enfant." }
+    {
+      "heading": "Taxer une clope au Portugal",
+      "body": "Taxer une clope au Portugal, c'est décontracté et plutôt bien accepté, surtout en soirée et chez les jeunes. La scène se joue volontiers entre fumeurs, autour d'un verre ou sur le pas d'une porte, et les Portugais ont la manie des adresses amicales (« ó chefe », « ó amigo ») qui transforment la demande en moment bon enfant plutôt qu'en intrusion. On reste tout de même poli au premier abord : on s'excuse avant de demander. Côté budget, un paquet de Marlboro tourne autour de 6,00 €. C'est un prix moyen pour l'Europe de l'Ouest : assez abordable pour qu'on dépanne sans drame, mais pas non plus donné, donc on ne mendie pas à la chaîne et il reste de bon ton de proposer de payer sa cigarette ou de rendre la pareille plus tard. Plus le paquet grimpe, plus on protège son bien ; ici, à 6 €, on partage assez volontiers entre fumeurs sans en faire une affaire d'État. Le mot pour cigarette est « cigarro ». Pour le tabac à rouler, on dit « tabaco de enrolar », et une roulée se dit « um cigarro enrolado ». FAUX AMI IMPORTANT : « beata » désigne un MÉGOT en portugais européen, et PAS une cigarette. Ne l'utilise jamais pour quémander une clope, sous peine de réclamer un mégot."
+    },
+    {
+      "heading": "La version polie (vouvoiement)",
+      "body": "« Desculpe, tem um cigarro? » : « Pardon, avez-vous une cigarette ? » ; le « desculpe » formel adoucit l'abordage et le verbe « tem » à la forme de politesse marque le respect dû à un inconnu. Prononciation : dech-koul-peu, tènn oun si-gar-rou."
+    },
+    {
+      "heading": "La version décontractée (tutoiement)",
+      "body": "« Desculpa, tens um cigarro? » (ou, sans excuse, « Tens um cigarro? ») : « Pardon, tu as une cigarette ? » (ou juste « T'as une clope ? ») ; « desculpa » est la forme informelle de l'excuse et « tens » le tutoiement de « avoir ». Prononciation : dech-koul-pa, tènch oun si-gar-rou."
+    },
+    {
+      "heading": "La version « une de rab » entre potes",
+      "body": "« Desculpa, tens um cigarro a mais? » : « Pardon, tu en as une de plus ? », c'est-à-dire « une de rab » ; le « a mais » sous-entend qu'on veut juste le surplus. Prononciation : dech-koul-pa, tènch oun si-gar-rou a maïch."
+    },
+    {
+      "heading": "L'abordage à l'amicale (« ó chefe »)",
+      "body": "« Ó chefe, tens um cigarro? » (aussi « Ó amigo… ») : « Eh chef » / « eh l'ami », appellations complices et taquines qui posent une ambiance bon enfant. Prononciation : o ché-feu, tènch oun si-gar-rou."
+    }
   ]
 }

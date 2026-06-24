@@ -97,7 +97,7 @@ export class GeoEngine {
     this.canvas.style.width = this.W + "px";
     this.canvas.style.height = this.H + "px";
     if (this.view === "globe") {
-      this.baseScale = Math.min(this.W, this.H) / 2 - 8;
+      this.baseScale = Math.max(1, Math.min(this.W, this.H) / 2 - 8); // never <=0 (tiny/transient layouts) -> avoids a negative projection scale
       this.projection.translate([this.W / 2, this.H / 2]).scale(this.baseScale * this.zoomFactor);
     }
     this.worldFitScale = this.d3.geoNaturalEarth1().fitExtent([[6, 6], [this.W - 6, this.H - 6]], { type: "Sphere" }).scale();

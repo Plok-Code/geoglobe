@@ -2,5 +2,7 @@ node_modules/
 build/ne_10m.geojson
 build/filtered.geojson
 build/simplified.geojson
+_*.json
+_*.geojson
 .DS_Store
 Thumbs.db

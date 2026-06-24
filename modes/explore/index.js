@@ -10,10 +10,10 @@ import { placeLabels } from "../../geo/labels.js";
 import { totalAreaEq } from "../../geo/geometry.js";
 
 const T = {
-  en: { continent: "Continent", toGlobe: "🌐 Globe", toMap: "🗺 2D map", capital: "Capital", region: "Region", close: "Close",
+  en: { continent: "Continent", toGlobe: "Globe", toMap: "2D map", labelsHide: "Hide names", labelsShow: "Show names", capital: "Capital", region: "Region", close: "Close",
     reg_world: "World", reg_africa: "Africa", reg_americas: "Americas", reg_asia: "Asia", reg_europe: "Europe", reg_middle_east: "Middle East", reg_oceania: "Oceania",
     reg_north_america: "North America", reg_south_america: "South America", reg_asia_east: "East Asia", reg_asia_southeast: "Southeast Asia", reg_asia_south: "South Asia", reg_asia_central: "Central Asia", reg_europe_west: "Western Europe", reg_europe_east: "Eastern Europe" },
-  fr: { continent: "Continent", toGlobe: "🌐 Globe", toMap: "🗺 Carte 2D", capital: "Capitale", region: "Région", close: "Fermer",
+  fr: { continent: "Continent", toGlobe: "Globe", toMap: "Carte 2D", labelsHide: "Masquer les noms", labelsShow: "Afficher les noms", capital: "Capitale", region: "Région", close: "Fermer",
     reg_world: "Monde", reg_africa: "Afrique", reg_americas: "Amériques", reg_asia: "Asie", reg_europe: "Europe", reg_middle_east: "Moyen-Orient", reg_oceania: "Océanie",
     reg_north_america: "Amérique du Nord", reg_south_america: "Amérique du Sud", reg_asia_east: "Asie de l'Est", reg_asia_southeast: "Asie du Sud-Est", reg_asia_south: "Asie du Sud", reg_asia_central: "Asie centrale", reg_europe_west: "Europe de l'Ouest", reg_europe_east: "Europe de l'Est" },
 };
@@ -46,6 +46,7 @@ async function build(ctx) {
 
   let continent = ctx.settings.modeGet("explore", "continent", "world");
   let view = ctx.settings.modeGet("explore", "view", "globe");
+  let labelsOn = ctx.settings.modeGet("explore", "labels", true);
   let selectedId = null;
 
   const engine = new GeoEngine(host, {
@@ -65,13 +66,19 @@ async function build(ctx) {
   const info = el("div", { class: "atlas-info", hidden: true, role: "region", "aria-live": "polite" });
   host.append(info);
 
-  // toolbar: continent filter + view toggle
+  // toolbar: continent filter + view toggle + labels toggle
   const contSel = el("select", { class: "region-select atlas-filter", "aria-label": tt("continent") });
   const viewBtn = el("button", { class: "btn", type: "button" });
-  ctx.toolbar.append(contSel, viewBtn);
+  const labelsBtn = el("button", { class: "btn", type: "button" });
+  ctx.toolbar.append(contSel, viewBtn, labelsBtn);
   function fillFilter() { clear(contSel); FILTER_OPTS.forEach((k) => contSel.append(el("option", { value: k, selected: k === continent }, tt("reg_" + k)))); }
   fillFilter();
   viewBtn.textContent = view === "globe" ? tt("toMap") : tt("toGlobe");
+  function syncLabelsBtn() {
+    labelsBtn.textContent = labelsOn ? tt("labelsHide") : tt("labelsShow");
+    labelsBtn.setAttribute("aria-pressed", String(labelsOn));
+  }
+  syncLabelsBtn();
 
   contSel.addEventListener("change", () => {
     continent = contSel.value; ctx.settings.modeSet("explore", "continent", continent);
@@ -82,6 +89,10 @@ async function build(ctx) {
     view = view === "globe" ? "map" : "globe"; ctx.settings.modeSet("explore", "view", view);
     viewBtn.textContent = view === "globe" ? tt("toMap") : tt("toGlobe");
     host.classList.add("labels-hidden"); engine.setView(view);
+  }, { signal: ctx.signal });
+  labelsBtn.addEventListener("click", () => {
+    labelsOn = !labelsOn; ctx.settings.modeSet("explore", "labels", labelsOn);
+    syncLabelsBtn(); placeAll(); // off -> blank map (name shows only in the bubble on click); on -> re-place
   }, { signal: ctx.signal });
 
   // ---- selection ----
@@ -97,7 +108,7 @@ async function build(ctx) {
     clear(info);
     const chips = (byId[id].regions || []).map((r) => el("span", { class: "info-chip" }, tt("reg_" + r) || r));
     info.append(
-      el("button", { class: "atlas-info-close icon-btn", type: "button", "aria-label": tt("close"), onClick: deselect }, "✕"),
+      el("button", { class: "atlas-info-close icon-btn", type: "button", "aria-label": tt("close"), onClick: deselect }, "×"),
       el("h3", { class: "atlas-info-name" }, displayName(id)),
       el("p", { class: "atlas-info-cap" }, [el("span", { class: "muted" }, tt("capital") + ": "), capName(id)]),
       chips.length ? el("div", { class: "atlas-info-chips" }, chips) : null,
@@ -126,6 +137,7 @@ async function build(ctx) {
   function placeAll() {
     const { W, H } = engine.size(); if (!W || !H) return;
     clear(labelLayer); clear(leaderSvg);
+    if (!labelsOn) return; // names hidden: blank map, the clicked country's name shows in the info bubble only
     leaderSvg.setAttribute("viewBox", "0 0 " + W + " " + H); leaderSvg.setAttribute("width", W); leaderSvg.setAttribute("height", H);
 
     // Scale label size with zoom: small when zoomed out (tidy), larger when zoomed in.
@@ -178,7 +190,7 @@ async function build(ctx) {
   schedule();
 
   function relang() {
-    fillFilter(); viewBtn.textContent = view === "globe" ? tt("toMap") : tt("toGlobe");
+    fillFilter(); viewBtn.textContent = view === "globe" ? tt("toMap") : tt("toGlobe"); syncLabelsBtn();
     if (selectedId) showInfo(selectedId);
     placeAll();
   }
