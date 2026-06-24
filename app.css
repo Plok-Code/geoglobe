@@ -153,6 +153,11 @@ html, body {
 }
 body { overflow: hidden; }
 
+/* The hidden attribute must always win, even over a component's display rule
+   (e.g. .quiz-end { display:flex }). Without this, [hidden] overlays stay on
+   top of the map and block all clicks/drags. */
+[hidden] { display: none !important; }
+
 #app { height: 100%; display: flex; flex-direction: column; }
 
 /* reduced motion: kill transitions/animations globally */
