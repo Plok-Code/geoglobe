@@ -1,7 +1,7 @@
 // @ts-check
 // App shell: builds the persistent chrome (header, toolbar slot, main, live regions,
 // settings dialog), runs the router, and mounts/unmounts modes with automatic cleanup.
-import { findMode, modes } from "./modeRegistry.js?v=13";
+import { findMode, modes } from "./modeRegistry.js?v=19";
 import { createRouter } from "./router.js";
 import { settings } from "./settings.js";
 import { theme } from "./theme.js";

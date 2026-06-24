@@ -2,9 +2,11 @@
 // Reusable map engine: D3 orthographic globe + Natural Earth 2D map on canvas.
 // Drag-rotate / pan, pinch + wheel zoom, tap picking (snap-to-nearest micro-state),
 // animated framing, highlight + locator overlays. Mode-agnostic; emits events.
-import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=13";
+import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=19";
 
 const RAD = Math.PI / 180, DEG = 180 / Math.PI;
+// Effectively unlimited zoom-in (vector map, no tiles needed) so you can dive into micro-states.
+const MAX_GLOBE_ZOOM = 12000, MAX_MAP_ZOOM = 50000;
 
 function versor(e) { var l = e[0] / 2 * RAD, sl = Math.sin(l), cl = Math.cos(l), p = e[1] / 2 * RAD, sp = Math.sin(p), cp = Math.cos(p), g = e[2] / 2 * RAD, sg = Math.sin(g), cg = Math.cos(g); return [cl * cp * cg + sl * sp * sg, sl * cp * cg - cl * sp * sg, cl * sp * cg + sl * cp * sg, cl * cp * sg - sl * sp * cg]; }
 versor.cartesian = function (e) { var l = e[0] * RAD, p = e[1] * RAD, cp = Math.cos(p); return [cp * Math.cos(l), cp * Math.sin(l), Math.sin(p)]; };
@@ -23,6 +25,14 @@ export class GeoEngine {
     this.byId = opts.byId;
     this.featureById = opts.featureById;
     this.allIds = this.world.features.map((f) => f.properties.id);
+    // one-time lng/lat bbox per country, for fast off-screen culling on the 2D map
+    this._fbox = {};
+    this.world.features.forEach((f) => {
+      let w = 180, s = 90, e = -180, n = -90;
+      const walk = (c) => { if (typeof c[0] === "number") { if (c[0] < w) w = c[0]; if (c[0] > e) e = c[0]; if (c[1] < s) s = c[1]; if (c[1] > n) n = c[1]; } else c.forEach(walk); };
+      walk(f.geometry.coordinates);
+      this._fbox[f.properties.id] = [w, s, e, n];
+    });
     this.view = opts.view || "globe";
     this.palette = opts.palette || {};
     this.reducedMotion = !!opts.reducedMotion;
@@ -175,34 +185,57 @@ export class GeoEngine {
     const vc = this.projection.invert([this.W / 2, this.H / 2]);
     return vc && this.d3.geoDistance(vc, lnglat) < Math.PI / 2;
   }
+  // On the 2D map, the lng/lat box currently on screen (null = draw everything: globe, or world view).
+  _visibleSet() {
+    if (this.view !== "map") return null;
+    const inv = (p) => { const ll = this.projection.invert(p); return ll && isFinite(ll[0]) ? ll : null; };
+    const cs = [inv([0, 0]), inv([this.W, 0]), inv([this.W, this.H]), inv([0, this.H]), inv([this.W / 2, this.H / 2])].filter(Boolean);
+    if (cs.length < 3) return null;
+    let w = 180, s = 90, e = -180, n = -90;
+    cs.forEach((p) => { if (p[0] < w) w = p[0]; if (p[0] > e) e = p[0]; if (p[1] < s) s = p[1]; if (p[1] > n) n = p[1]; });
+    if (e - w >= 300) return null; // most of the world visible -> culling pointless
+    const mx = (e - w) * 0.25 + 1, my = (n - s) * 0.25 + 1;
+    return [w - mx, s - my, e + mx, n + my];
+  }
+  _isVisible(id, vb) { if (!vb) return true; const b = this._fbox[id]; return !(b[2] < vb[0] || b[0] > vb[2] || b[3] < vb[1] || b[1] > vb[3]); }
 
   // ---- rendering ----
   redraw() {
     if (!this.W || !this.H) return;
+    if (this.view === "globe") {
+      // Clip to just beyond the visible cap so deep zoom only renders a tiny spherical patch
+      // (not the whole hemisphere). This is what makes near-unlimited zoom fast.
+      const s = this.projection.scale(), r = Math.min(this.W, this.H) / 2 + 40;
+      this.projection.clipAngle(r >= s ? 90 : Math.min(90, Math.asin(r / s) * DEG * 1.3 + 0.4));
+    }
+    // Bound geoPath's adaptive resampling so the point count stays ~constant at any zoom.
+    this.projection.precision(Math.max(0.3, this.projection.scale() * 0.0012));
     const ctx = this.ctx, path = this.path, P = this.palette, d3 = this.d3;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     ctx.clearRect(0, 0, this.W, this.H);
     ctx.fillStyle = P.space; ctx.fillRect(0, 0, this.W, this.H);
 
     ctx.beginPath(); path({ type: "Sphere" });
-    if (this.view === "globe") {
+    if (this.view === "globe" && this.projection.scale() <= Math.max(this.W, this.H) * 3) {
       const rr = this.projection.scale(), cx = this.W / 2, cy = this.H / 2;
       const grad = ctx.createRadialGradient(cx - rr * 0.35, cy - rr * 0.4, rr * 0.1, cx, cy, rr * 1.05);
       grad.addColorStop(0, P.oceanLight || P.ocean); grad.addColorStop(1, P.ocean);
       ctx.fillStyle = grad;
-    } else ctx.fillStyle = P.ocean;
+    } else ctx.fillStyle = P.ocean; // flat ocean when zoomed in (avoids a multi-million-px gradient)
     ctx.fill();
 
     ctx.beginPath(); path(this.graticule); ctx.lineWidth = 0.5; ctx.strokeStyle = P.graticule; ctx.stroke();
 
+    const vb = this._visibleSet(); // off-screen countries are skipped when zoomed into the 2D map
     if (this.regionSet) {
       const inF = [], outF = [];
-      this.world.features.forEach((f) => (this.regionSet[f.properties.id] ? inF : outF).push(f));
+      this.world.features.forEach((f) => { if (!this._isVisible(f.properties.id, vb)) return; (this.regionSet[f.properties.id] ? inF : outF).push(f); });
       ctx.beginPath(); path({ type: "FeatureCollection", features: outF }); ctx.fillStyle = P.landDim; ctx.fill();
       ctx.beginPath(); path({ type: "FeatureCollection", features: inF }); ctx.fillStyle = P.land; ctx.fill();
       ctx.lineWidth = 0.4; ctx.strokeStyle = P.border; ctx.stroke();
     } else {
-      ctx.beginPath(); path(this.world); ctx.fillStyle = P.land; ctx.fill();
+      const feats = vb ? this.world.features.filter((f) => this._isVisible(f.properties.id, vb)) : this.world.features;
+      ctx.beginPath(); path(vb ? { type: "FeatureCollection", features: feats } : this.world); ctx.fillStyle = P.land; ctx.fill();
       ctx.lineWidth = 0.4; ctx.strokeStyle = P.border; ctx.stroke();
     }
 
@@ -289,9 +322,9 @@ export class GeoEngine {
     const d = Math.hypot(p[0][0] - p[1][0], p[0][1] - p[1][1]) || 1, ratio = d / this._pinch.dist;
     const m = [(p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2];
     if (this.view === "globe") {
-      this.zoomFactor = Math.max(1, Math.min(70, this._pinch.zoom0 * ratio)); this.projection.scale(this.baseScale * this.zoomFactor);
+      this.zoomFactor = Math.max(1, Math.min(MAX_GLOBE_ZOOM, this._pinch.zoom0 * ratio)); this.projection.scale(this.baseScale * this.zoomFactor);
     } else {
-      const ns = Math.max(this.worldFitScale * 0.85, Math.min(this.worldFitScale * 220, this._pinch.scale0 * ratio)); this.projection.scale(ns);
+      const ns = Math.max(this.worldFitScale * 0.85, Math.min(this.worldFitScale * MAX_MAP_ZOOM, this._pinch.scale0 * ratio)); this.projection.scale(ns);
       if (this._pinch.geoMid && isFinite(this._pinch.geoMid[0])) { const p2 = this.projection(this._pinch.geoMid), tr = this.projection.translate(); this.projection.translate([tr[0] + (m[0] - p2[0]), tr[1] + (m[1] - p2[1])]); }
     }
     this.redraw();
@@ -304,10 +337,10 @@ export class GeoEngine {
       clearTimeout(this._wheelT); this._wheelT = setTimeout(() => this._emit("viewend"), 200);
       const k = e.deltaY < 0 ? 1.15 : 0.87;
       if (this.view === "globe") {
-        this.zoomFactor = Math.max(1, Math.min(70, this.zoomFactor * k)); this.projection.scale(this.baseScale * this.zoomFactor); this.redraw();
+        this.zoomFactor = Math.max(1, Math.min(MAX_GLOBE_ZOOM, this.zoomFactor * k)); this.projection.scale(this.baseScale * this.zoomFactor); this.redraw();
       } else {
         const p = [e.offsetX, e.offsetY], ll = this.projection.invert(p);
-        const ns = Math.max(this.worldFitScale * 0.85, Math.min(this.worldFitScale * 220, this.projection.scale() * k));
+        const ns = Math.max(this.worldFitScale * 0.85, Math.min(this.worldFitScale * MAX_MAP_ZOOM, this.projection.scale() * k));
         this.projection.scale(ns);
         if (ll && isFinite(ll[0])) { const p2 = this.projection(ll), tr = this.projection.translate(); this.projection.translate([tr[0] + (p[0] - p2[0]), tr[1] + (p[1] - p2[1])]); }
         this.redraw();

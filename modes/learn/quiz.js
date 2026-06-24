@@ -5,7 +5,7 @@ import { el, clear, injectCss } from "../../core/dom.js";
 import { getLang } from "../../core/i18n.js";
 import { loadGeo, idsForRegion } from "../../core/data.js";
 import { norm, foldChar, isLetterOrDigit } from "../../core/text.js";
-import { GeoEngine } from "../../geo/GeoEngine.js?v=13";
+import { GeoEngine } from "../../geo/GeoEngine.js?v=19";
 
 const T = {
   en: {
