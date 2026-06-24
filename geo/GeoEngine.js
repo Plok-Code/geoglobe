@@ -2,7 +2,7 @@
 // Reusable map engine: D3 orthographic globe + Natural Earth 2D map on canvas.
 // Drag-rotate / pan, pinch + wheel zoom, tap picking (snap-to-nearest micro-state),
 // animated framing, highlight + locator overlays. Mode-agnostic; emits events.
-import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=12";
+import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=13";
 
 const RAD = Math.PI / 180, DEG = 180 / Math.PI;
 

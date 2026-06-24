@@ -5,9 +5,9 @@ import { el, clear, injectCss } from "../../core/dom.js";
 import { getLang } from "../../core/i18n.js";
 import { loadGeo, idsForRegion } from "../../core/data.js";
 import { norm } from "../../core/text.js";
-import { GeoEngine } from "../../geo/GeoEngine.js?v=12";
+import { GeoEngine } from "../../geo/GeoEngine.js?v=13";
 import { placeLabels } from "../../geo/labels.js";
-import { totalAreaEq } from "../../geo/geometry.js?v=12";
+import { totalAreaEq } from "../../geo/geometry.js?v=13";
 
 const T = {
   en: { continent: "Continent", toGlobe: "Globe", toMap: "2D map", labelsHide: "Hide names", labelsShow: "Show names", capital: "Capital", region: "Region", close: "Close",

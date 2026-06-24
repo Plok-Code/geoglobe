@@ -5,13 +5,13 @@ import { el, clear, injectCss } from "../../core/dom.js";
 import { getLang } from "../../core/i18n.js";
 import { loadGeo, idsForRegion } from "../../core/data.js";
 import { norm, foldChar, isLetterOrDigit } from "../../core/text.js";
-import { GeoEngine } from "../../geo/GeoEngine.js?v=12";
+import { GeoEngine } from "../../geo/GeoEngine.js?v=13";
 
 const T = {
   en: {
     subject: "What to guess", answerMode: "How to answer", region: "Region",
     subjCountries: "Countries", subjCapitals: "Capitals", modeType: "Type", modeFind: "Click",
-    play: "Play", playAgain: "Play again", config: "Settings",
+    play: "Play", playAgain: "Play again", config: "Settings", recenter: "⌖ Recenter",
     toGlobe: "Globe", toMap: "2D map",
     progress: "Country", score: "Score", guess: "Guess", next: "Next →", results: "See results →",
     tries: "Tries: ", wrongAgain: "Wrong, try again", wrongLast: "Wrong, last try",
@@ -30,7 +30,7 @@ const T = {
   fr: {
     subject: "À deviner", answerMode: "Comment répondre", region: "Région",
     subjCountries: "Pays", subjCapitals: "Capitales", modeType: "Écrire", modeFind: "Cliquer",
-    play: "Jouer", playAgain: "Rejouer", config: "Réglages",
+    play: "Jouer", playAgain: "Rejouer", config: "Réglages", recenter: "⌖ Recentrer",
     toGlobe: "Globe", toMap: "Carte 2D",
     progress: "Pays", score: "Score", guess: "Valider", next: "Suivant →", results: "Voir les résultats →",
     tries: "Essais : ", wrongAgain: "Faux, réessaie", wrongLast: "Faux, dernier essai",
@@ -95,11 +95,13 @@ export async function createSession(ctx) {
   const endOv = el("div", { class: "quiz-end", hidden: true });
   ctx.root.append(cfgPanel, hud, endOv);
 
-  // toolbar: view toggle + config button
+  // toolbar: view toggle + recenter + config button
   const viewBtn = el("button", { class: "btn", type: "button" });
+  const recenterBtn = el("button", { class: "btn", type: "button" });
   const cfgBtn = el("button", { class: "btn", type: "button", hidden: true });
-  ctx.toolbar.append(viewBtn, cfgBtn);
+  ctx.toolbar.append(viewBtn, recenterBtn, cfgBtn);
   viewBtn.addEventListener("click", () => setView(cfg.view === "globe" ? "map" : "globe"), { signal: ctx.signal });
+  recenterBtn.addEventListener("click", recenter, { signal: ctx.signal });
   cfgBtn.addEventListener("click", () => showConfig(), { signal: ctx.signal });
 
   // ---- state ----
@@ -113,6 +115,17 @@ export async function createSession(ctx) {
     cfg.view = v; ctx.settings.modeSet("learn", "view", v);
     viewBtn.textContent = v === "globe" ? tt("toMap") : tt("toGlobe");
     engine.setView(v);
+  }
+
+  // A new country never recenters the camera on its own; the Recenter button is the only thing
+  // that frames. Type/revealed -> frame the target country; find (unsolved) -> frame the region.
+  function recenter() {
+    if (phase === "play") {
+      if (cfg.mode === "type" || resolved) engine.frameCountry(targetId, true);
+      else engine.frameRegion(order, true);
+    } else {
+      engine.frameRegion(idsForRegion(answers, cfg.region), true);
+    }
   }
 
   // ---- config panel ----
@@ -224,8 +237,7 @@ export async function createSession(ctx) {
       h.input.value = ""; h.input.disabled = false; h.submit.disabled = false;
       h.input.placeholder = cfg.subject === "capitals" ? tt("phCapital") : tt("phCountry");
       engine.setCursorPick(false);
-      engine.highlight(targetId);
-      engine.frameCountry(targetId, true);
+      engine.highlight(targetId); // mark the country, but do NOT move the camera
       h.input.focus();
     } else {
       h.task.className = "task find";
@@ -235,7 +247,6 @@ export async function createSession(ctx) {
       h.form.hidden = true;
       engine.clearHighlight();
       engine.setCursorPick(true);
-      engine.frameRegion(order, true);
     }
   }
 
@@ -272,8 +283,7 @@ export async function createSession(ctx) {
     h.attempts.textContent = ""; clearHint();
     if (cfg.mode === "type") { h.input.disabled = true; h.submit.disabled = true; }
     engine.setCursorPick(false);
-    engine.highlight(targetId);
-    if (cfg.mode === "find") engine.frameCountry(targetId, true); else engine.redraw();
+    engine.highlight(targetId); // reveal it in place; the camera stays where the player left it
     h.next.textContent = idx + 1 >= order.length ? tt("results") : tt("next");
     h.next.hidden = false; h.next.focus();
   }
@@ -307,11 +317,13 @@ export async function createSession(ctx) {
 
   // ---- init view + show config ----
   viewBtn.textContent = cfg.view === "globe" ? tt("toMap") : tt("toGlobe");
+  recenterBtn.textContent = tt("recenter");
   showConfig();
 
   // ---- language change: re-render current phase strings, keep state ----
   function relang() {
     viewBtn.textContent = cfg.view === "globe" ? tt("toMap") : tt("toGlobe");
+    recenterBtn.textContent = tt("recenter");
     if (phase === "config") buildConfig();
     else if (phase === "end") endGame();
     else if (phase === "play") {
