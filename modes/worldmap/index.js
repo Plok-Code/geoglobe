@@ -216,7 +216,7 @@ async function build(ctx) {
   const map = new maplibregl.Map({
     container: host, style: STYLE, center: START.center, zoom: START.zoom,
     minZoom: 0, maxZoom: 18, attributionControl: true, dragRotate: false,
-    renderWorldCopies: false,
+    renderWorldCopies: true, // keep east-west panning possible (world wraps seamlessly)
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
   if (maplibregl.GlobeControl) map.addControl(new maplibregl.GlobeControl(), "top-right");
