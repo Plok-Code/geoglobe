@@ -2,7 +2,7 @@
 // Reusable map engine: D3 orthographic globe + Natural Earth 2D map on canvas.
 // Drag-rotate / pan, pinch + wheel zoom, tap picking (snap-to-nearest micro-state),
 // animated framing, highlight + locator overlays. Mode-agnostic; emits events.
-import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=19";
+import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=21";
 
 const RAD = Math.PI / 180, DEG = 180 / Math.PI;
 // Effectively unlimited zoom-in (vector map, no tiles needed) so you can dive into micro-states.
@@ -250,7 +250,7 @@ export class GeoEngine {
     // the dot/country directly. The smaller the country, the more you must zoom before it vanishes.
     if (this._locZones.length) {
       const minWH = Math.min(this.W, this.H);
-      const SIDE = Math.max(34, 0.15 * minWH), half = SIDE / 2;
+      const SIDE = Math.max(26, 0.05 * minWH), half = SIDE / 2; // smallest box that's still clearly visible
       const col = P.locator || P.highlight;
       for (let i = 0; i < this._locZones.length; i++) {
         const b = this._locZones[i], cLng = (b[0] + b[2]) / 2, cLat = (b[1] + b[3]) / 2;
@@ -272,23 +272,16 @@ export class GeoEngine {
 
   // ---- input ----
   _pickList() { return this.regionSet ? Object.keys(this.regionSet) : this.allIds; }
+  // Exact pick: you must click INSIDE the country's polygon (no centroid snap). Zoom in to click
+  // tiny states precisely. A tiny 3px tolerance only covers sub-pixel rounding right on a border.
   _pickCountry(sx, sy) {
-    const SNAP = 26;
     const ids = this._pickList();
-    const vc = this.view === "globe" ? this.projection.invert([this.W / 2, this.H / 2]) : null;
-    let best = null, bestD2 = SNAP * SNAP;
-    for (let i = 0; i < ids.length; i++) {
-      const id = ids[i];
-      if (totalAreaEq(this.featureById[id].geometry) >= AREA_THRESHOLD) continue;
-      const c = this.byId[id].center;
-      if (vc && this.d3.geoDistance(vc, c) > Math.PI / 2 * 0.98) continue;
-      const sp = this.projection(c); if (!sp) continue;
-      const dx = sp[0] - sx, dy = sp[1] - sy, d2 = dx * dx + dy * dy;
-      if (d2 < bestD2) { bestD2 = d2; best = id; }
+    const tries = [[sx, sy], [sx - 3, sy], [sx + 3, sy], [sx, sy - 3], [sx, sy + 3]];
+    for (let t = 0; t < tries.length; t++) {
+      const ll = this.projection.invert(tries[t]);
+      if (!ll || !isFinite(ll[0])) continue;
+      for (let j = 0; j < ids.length; j++) if (this.d3.geoContains(this.featureById[ids[j]], ll)) return ids[j];
     }
-    if (best) return best;
-    const ll = this.projection.invert([sx, sy]);
-    if (ll && isFinite(ll[0])) for (let j = 0; j < ids.length; j++) if (this.d3.geoContains(this.featureById[ids[j]], ll)) return ids[j];
     return null;
   }
   _ptArr() { const a = []; this._ptrs.forEach((v) => a.push(v)); return a; }

@@ -1,5 +1,5 @@
 // @ts-check
-import { createSession } from "./quiz.js?v=19";
+import { createSession } from "./quiz.js?v=21";
 
 let session = null;
 
