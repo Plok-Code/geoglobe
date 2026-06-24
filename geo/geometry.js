@@ -72,14 +72,13 @@ function rectGeom(b) {
   for (i = 0; i <= STEPS; i++) pts.push([w, n + (s - n) * i / STEPS]);
   return { type: "LineString", coordinates: pts };
 }
-/** Locator rectangles around a small country's zones; [] for large countries. */
-export function computeLocators(geom) {
-  var out = [];
-  if (!geom || totalAreaEq(geom) >= AREA_THRESHOLD) return out;
+/** Geographic bboxes [w,s,e,n] of a small country's zones; [] for large countries.
+    The engine turns each into a fixed screen-size locator box. */
+export function locatorZones(geom) {
+  if (!geom || totalAreaEq(geom) >= AREA_THRESHOLD) return [];
   var zones = computeZones(geom);
   if (zones.length > 8) zones = [clusterBbox(zones)];
-  for (var i = 0; i < zones.length; i++) out.push(rectGeom(zones[i]));
-  return out;
+  return zones;
 }
 
 /** Spherical mean of [lng,lat] centers (handles antimeridian/world). */

@@ -5,7 +5,7 @@ import { el, clear, injectCss } from "../../core/dom.js";
 import { getLang } from "../../core/i18n.js";
 import { loadGeo, idsForRegion } from "../../core/data.js";
 import { norm, foldChar, isLetterOrDigit } from "../../core/text.js";
-import { GeoEngine } from "../../geo/GeoEngine.js";
+import { GeoEngine } from "../../geo/GeoEngine.js?v=12";
 
 const T = {
   en: {
@@ -17,7 +17,7 @@ const T = {
     tries: "Tries: ", wrongAgain: "Wrong, try again", wrongLast: "Wrong, last try",
     correct: "Correct: ", answer: "Answer: ",
     gameOver: "Game over", scored: "You scored", missed: "Missed", perfect: "Perfect game!",
-    phCountry: "Type the country...", phCapital: "Type the capital...",
+    phCountry: "Type your answer...", phCapital: "Type your answer...",
     taskTypeCountry: "Which country is highlighted?", taskTypeCapital: "What is this country's capital?",
     taskFindCountry: "Find: ", taskFindCapital: "Which country's capital is ",
     reg_world: "World", reg_africa: "Africa", reg_americas: "Americas (all)",
@@ -36,7 +36,7 @@ const T = {
     tries: "Essais : ", wrongAgain: "Faux, réessaie", wrongLast: "Faux, dernier essai",
     correct: "Correct : ", answer: "Réponse : ",
     gameOver: "Partie terminée", scored: "Score :", missed: "Ratés", perfect: "Sans-faute !",
-    phCountry: "Tape le pays...", phCapital: "Tape la capitale...",
+    phCountry: "Tape ta réponse...", phCapital: "Tape ta réponse...",
     taskTypeCountry: "Quel est ce pays ?", taskTypeCapital: "Quelle est la capitale de ce pays ?",
     taskFindCountry: "Trouve : ", taskFindCapital: "Quel pays a pour capitale ",
     reg_world: "Monde", reg_africa: "Afrique", reg_americas: "Amériques (toutes)",
@@ -165,9 +165,15 @@ export async function createSession(ctx) {
       el("div", { class: "stat" }, [h.scoreLabel, h.score]),
     ]);
     h.task = el("div", { class: "task" });
-    h.input = el("input", { class: "q-input", type: "text", autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: "false" });
+    h.input = el("input", {
+      class: "q-input", type: "text", name: "geo-answer", autocomplete: "off",
+      autocapitalize: "off", autocorrect: "off", spellcheck: "false",
+      // stop password managers (NordPass/LastPass/1Password/Bitwarden/Dashlane) hijacking this field
+      "data-lpignore": "true", "data-1p-ignore": "true", "data-bwignore": "true",
+      "data-form-type": "other", "data-np-autofill": "off",
+    });
     h.submit = el("button", { class: "btn primary", type: "submit" }, tt("guess"));
-    h.form = el("form", { class: "q-form" }, [h.input, h.submit]);
+    h.form = el("form", { class: "q-form", autocomplete: "off" }, [h.input, h.submit]);
     h.form.addEventListener("submit", (e) => { e.preventDefault(); submitGuess(); }, { signal: ctx.signal });
     h.hint = el("div", { class: "hint" });
     h.attempts = el("div", { class: "attempts" });

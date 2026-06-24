@@ -2,7 +2,7 @@
 // Reusable map engine: D3 orthographic globe + Natural Earth 2D map on canvas.
 // Drag-rotate / pan, pinch + wheel zoom, tap picking (snap-to-nearest micro-state),
 // animated framing, highlight + locator overlays. Mode-agnostic; emits events.
-import { totalAreaEq, countrySpan, computeLocators, sphericalMean, AREA_THRESHOLD } from "./geometry.js";
+import { totalAreaEq, countrySpan, locatorZones, sphericalMean, AREA_THRESHOLD } from "./geometry.js?v=12";
 
 const RAD = Math.PI / 180, DEG = 180 / Math.PI;
 
@@ -31,7 +31,7 @@ export class GeoEngine {
 
     this.regionSet = null;       // {id:true} drawn-normal + pickable; null = all
     this.highlightId = null;
-    this.locators = [];
+    this._locZones = [];
     this.framing = { kind: "region", ids: this.allIds };
     this.zoomFactor = 1; this.baseScale = 1; this.worldFitScale = 1;
     this.W = 0; this.H = 0; this.dpr = 1;
@@ -159,8 +159,8 @@ export class GeoEngine {
   }
 
   // ---- highlight / locators ----
-  highlight(id) { this.highlightId = id; this.locators = id ? computeLocators(this.featureById[id].geometry) : []; this.redraw(); }
-  clearHighlight() { this.highlightId = null; this.locators = []; this.redraw(); }
+  highlight(id) { this.highlightId = id; this._locZones = id ? locatorZones(this.featureById[id].geometry) : []; this.redraw(); }
+  clearHighlight() { this.highlightId = null; this._locZones = []; this.redraw(); }
   setCursorPick(on) { this.canvas.classList.toggle("clickable", !!on); }
 
   // ---- geo queries ----
@@ -211,10 +211,28 @@ export class GeoEngine {
       ctx.fillStyle = P[this.hlKey] || P.highlight; ctx.fill();
       ctx.lineWidth = 1.6; ctx.strokeStyle = P[this.hlKey + "Edge"] || P.selectEdge || "#fff"; ctx.stroke();
     }
-    if (this.locators.length) {
-      ctx.lineWidth = 2.5; ctx.strokeStyle = P.locator || P.highlight; ctx.setLineDash([8, 6]);
-      for (let i = 0; i < this.locators.length; i++) { ctx.beginPath(); path(this.locators[i]); ctx.stroke(); }
-      ctx.setLineDash([]);
+    // Locator: a FIXED screen-size box centered on a tiny country + an orange dot at its exact spot.
+    // It does NOT scale with zoom (so it never blows up). As you zoom in, the country grows to fill
+    // the box; once it occupies the box (LOC_FRACTION of the screen) the box is dropped and you see
+    // the dot/country directly. The smaller the country, the more you must zoom before it vanishes.
+    if (this._locZones.length) {
+      const minWH = Math.min(this.W, this.H);
+      const SIDE = Math.max(34, 0.15 * minWH), half = SIDE / 2;
+      const col = P.locator || P.highlight;
+      for (let i = 0; i < this._locZones.length; i++) {
+        const b = this._locZones[i], cLng = (b[0] + b[2]) / 2, cLat = (b[1] + b[3]) / 2;
+        if (this.view === "globe" && !this.isFrontFacing([cLng, cLat])) continue;
+        let minx = Infinity, miny = Infinity, maxx = -Infinity, maxy = -Infinity, ok = true;
+        const corners = [[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+        for (let c = 0; c < 4; c++) { const sp = this.projection(corners[c]); if (!sp || !isFinite(sp[0])) { ok = false; break; } if (sp[0] < minx) minx = sp[0]; if (sp[0] > maxx) maxx = sp[0]; if (sp[1] < miny) miny = sp[1]; if (sp[1] > maxy) maxy = sp[1]; }
+        if (!ok) continue;
+        const cx = (minx + maxx) / 2, cy = (miny + maxy) / 2, spanPx = Math.max(maxx - minx, maxy - miny);
+        ctx.beginPath(); ctx.arc(cx, cy, 3, 0, 2 * Math.PI); ctx.fillStyle = col; ctx.fill(); // the orange spot
+        if (spanPx >= SIDE) continue; // zoomed in enough: country fills the box -> no rectangle
+        ctx.lineWidth = 2; ctx.strokeStyle = col; ctx.setLineDash([7, 5]);
+        ctx.strokeRect(cx - half, cy - half, SIDE, SIDE);
+        ctx.setLineDash([]);
+      }
     }
     ctx.beginPath(); path({ type: "Sphere" }); ctx.lineWidth = 1; ctx.strokeStyle = P.sphereEdge; ctx.stroke();
   }
