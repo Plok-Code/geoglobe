@@ -212,14 +212,28 @@ async function build(ctx) {
   regionBtn.addEventListener("click", () => toggleRegionPanel(), { signal: ctx.signal });
 
   // ---- map ----
-  const START = { center: [12, 24], zoom: 1.4 };
+  const START = { center: [0, 24], zoom: 1.4 };
   const map = new maplibregl.Map({
     container: host, style: STYLE, center: START.center, zoom: START.zoom,
-    minZoom: 0.6, maxZoom: 18, attributionControl: true, dragRotate: false,
+    minZoom: 0, maxZoom: 18, attributionControl: true, dragRotate: false,
+    renderWorldCopies: false,
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
   if (maplibregl.GlobeControl) map.addControl(new maplibregl.GlobeControl(), "top-right");
   map.on("error", (e) => console.error("[worldmap]", e && e.error ? e.error : e));
+
+  // Max dezoom (in 2D / Mercator) = the world fits the viewport width EXACTLY: the 180 meridian sits
+  // pile on the left and right edges, no overflow. You can zoom in but never out past this. The world
+  // is 512*2^zoom px wide, so the fit zoom is log2(W/512). Recomputed on every resize -> fully responsive.
+  let fitT = 0;
+  function fitMinZoom(snap) {
+    const W = host.clientWidth; if (!W) return;
+    const mz = Math.log2(W / 512);
+    map.setMinZoom(mz);
+    if (snap || map.getZoom() < mz) map.setZoom(mz);
+  }
+  map.on("load", () => fitMinZoom(false));
+  map.on("resize", () => { clearTimeout(fitT); fitT = setTimeout(() => fitMinZoom(false), 30); });
 
   let unitsData = null;
 
@@ -383,7 +397,8 @@ async function build(ctx) {
     // de-facto borders + locator boxes stay above the water so they remain visible as markers
     map.addLayer({ id: "wm-defacto-line", type: "line", source: "wm-units", filter: ["==", ["get", "cls"], "defacto"], layout: { visibility: incDefacto ? "visible" : "none" }, paint: { "line-color": C.defacto, "line-width": 1.8, "line-dasharray": [2, 1.5] } }, firstSymbol);
     const fade = ["interpolate", ["linear"], ["zoom"], 4.2, 1, 6, 0];
-    map.addLayer({ id: "wm-loc-fill", type: "fill", source: "wm-loc", paint: { "fill-color": C.loc, "fill-opacity": ["*", 0.16, fade] } }, firstSymbol);
+    // fill-opacity must be a top-level interpolate (zoom can't be nested under "*"): 0.16 -> 0 across z 4.2..6
+    map.addLayer({ id: "wm-loc-fill", type: "fill", source: "wm-loc", paint: { "fill-color": C.loc, "fill-opacity": ["interpolate", ["linear"], ["zoom"], 4.2, 0.16, 6, 0] } }, firstSymbol);
     map.addLayer({ id: "wm-loc-line", type: "line", source: "wm-loc", paint: { "line-color": C.loc, "line-width": 1.6, "line-opacity": fade } }, firstSymbol);
 
     applyLabelVisibility();
