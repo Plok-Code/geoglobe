@@ -12,7 +12,7 @@ import { loadAnswers } from "../../core/data.js";
 const MAPLIBRE_JS = "https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js";
 const MAPLIBRE_CSS = "https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css";
 const STYLE = "https://tiles.openfreemap.org/styles/liberty";
-const UNITS = "data/worldmap-units.geojson?v=4";
+const UNITS = "data/worldmap-units.geojson?v=5";
 
 // dark atlas palette (matches app.css map tokens)
 const C = {
@@ -26,7 +26,7 @@ const DEFACTO = {
   KOS: { name: "Kosovo", name_fr: "Kosovo", cap: "Pristina", cap_fr: "Pristina", sov195: "SRB" },
   SOL: { name: "Somaliland", name_fr: "Somaliland", cap: "Hargeisa", cap_fr: "Hargeisa", sov195: "SOM" },
   SAH: { name: "Western Sahara", name_fr: "Sahara occidental", cap: "El Aaiun", cap_fr: "Laayoune", sov195: "MAR" },
-  RTCN: { name: "Northern Cyprus", name_fr: "Chypre du Nord", cap: "North Nicosia", cap_fr: "Nicosie-Nord", sov195: "CYP" },
+  RTCN: { name: "Turkish Republic of Northern Cyprus", name_fr: "République turque de Chypre du Nord", aliases: ["Northern Cyprus"], aliases_fr: ["Chypre du Nord"], cap: "North Nicosia", cap_fr: "Nicosie-Nord", sov195: "CYP" },
   PMR: { name: "Transnistria", name_fr: "Transnistrie", cap: "Tiraspol", cap_fr: "Tiraspol", sov195: "MDA" },
   ABK: { name: "Abkhazia", name_fr: "Abkhazie", cap: "Sukhumi", cap_fr: "Soukhoumi", sov195: "GEO" },
   SOS: { name: "South Ossetia", name_fr: "Ossétie du Sud", cap: "Tskhinvali", cap_fr: "Tskhinvali", sov195: "GEO" },
@@ -115,7 +115,7 @@ async function build(ctx) {
   // name -> unit id, to resolve a clicked country LABEL to a unit
   const nameIndex = {};
   Object.values(byId).forEach((a) => { [a.name, a.name_fr].concat(a.aliases || [], a.aliases_fr || []).forEach((n) => { if (n) nameIndex[norm(n)] = a.iso3; }); });
-  Object.entries(DEFACTO).forEach(([id, d]) => { [d.name, d.name_fr].forEach((n) => { if (n) nameIndex[norm(n)] = id; }); });
+  Object.entries(DEFACTO).forEach(([id, d]) => { [d.name, d.name_fr].concat(d.aliases || [], d.aliases_fr || []).forEach((n) => { if (n) nameIndex[norm(n)] = id; }); });
 
   function unitInfo(id) {
     if (id === "INTL") return { name: "International territory", name_fr: "Territoire international", cap: "", cap_fr: "", cls: "intl", regions: [] };

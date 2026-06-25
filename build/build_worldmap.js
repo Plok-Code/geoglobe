@@ -171,6 +171,14 @@ for (const f of ne.features) {
   if (TRIO[b]) { const g = roundGeom(f.geometry); if (g) out.push({ type: "Feature", properties: { sov: TRIO[b].id, sov195: TRIO[b].u195, cls: "defacto", nm: b }, geometry: g }); }
 }
 
+// hollow each de-facto state out of its claimant's polygon. The 5 world-atlas de-facto states (Taiwan,
+// Kosovo, ...) are already separate polygons so this is a no-op for them; Abkhazia / South Ossetia /
+// Transnistria are overlaid on top of a claimant that still covers them, so subtract them out -> in the
+// 203-states view selecting Georgia no longer colours the breakaways, and clicking one resolves to it.
+const { hollowDefacto } = require("./hollow_defacto.js");
+const hollowed = hollowDefacto(out);
+console.log("hollowed de-facto out of claimants:", hollowed.changed.length ? hollowed.changed.sort().join(", ") : "(none)");
+
 // split antimeridian-crossing polygons so the globe fill never wraps across the sphere
 let splitCount = 0;
 out.forEach((f) => { const before = f.geometry.type === "MultiPolygon" ? f.geometry.coordinates.length : 1; f.geometry = fixAntimeridian(f.geometry); const after = f.geometry.type === "MultiPolygon" ? f.geometry.coordinates.length : 1; if (after > before) splitCount++; });
